@@ -63,4 +63,14 @@ internal class DrawAreaDataTest{
         assertEquals(400F, area.width)
         assertEquals(150F, area.height)
     }
+
+    @Test
+    fun testCreateDrawAreaDataWithFloat() {
+        val drawAreaData = DrawAreaData(10f, 20f, 100f, 200f)
+        val area = drawAreaData.calcArea(1280f, 720f)
+        assertEquals(10f, area.x)
+        assertEquals(20f, area.y)
+        assertEquals(100f, area.width)
+        assertEquals(200f, area.height)
+    }
 }
