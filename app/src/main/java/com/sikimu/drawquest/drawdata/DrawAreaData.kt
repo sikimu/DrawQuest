@@ -7,7 +7,8 @@ data class DrawAreaData(
     val y: DrawAreaParam ,
     val width: DrawAreaParam ,
     val height: DrawAreaParam
-) {
+)
+{
     fun calcArea(screenWidth: Float , screenHeight: Float): Area {
         val x = when (val value = x) {
             is DrawAreaParam.Pixel -> value.value
@@ -29,9 +30,3 @@ data class DrawAreaData(
     }
 }
 
-sealed class DrawAreaParam {
-    data class Pixel(val value: Float) : DrawAreaParam()
-    data class Percent(val value: Float) : DrawAreaParam() {
-        constructor(value: Int) : this(value.toFloat())
-    }
-}
