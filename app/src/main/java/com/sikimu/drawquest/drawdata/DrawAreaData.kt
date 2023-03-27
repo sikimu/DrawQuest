@@ -8,35 +8,95 @@ data class DrawAreaData(
     val width: DrawAreaParam ,
     val height: DrawAreaParam
 ) {
-    constructor(vararg params: Any): this(
-        x = params.getOrNull(0)?.let {
-            when (it) {
-                is DrawAreaParam -> it
-                is Float -> DrawAreaParam.Pixel(it)
-                else -> null
-            }
-        } ?: throw IllegalArgumentException("x must be DrawAreaParam or Float"),
-        y = params.getOrNull(1)?.let {
-            when (it) {
-                is DrawAreaParam -> it
-                is Float -> DrawAreaParam.Pixel(it)
-                else -> null
-            }
-        } ?: throw IllegalArgumentException("y must be DrawAreaParam or Float"),
-        width = params.getOrNull(2)?.let {
-            when (it) {
-                is DrawAreaParam -> it
-                is Float -> DrawAreaParam.Pixel(it)
-                else -> null
-            }
-        } ?: throw IllegalArgumentException("width must be DrawAreaParam or Float"),
-        height = params.getOrNull(3)?.let {
-            when (it) {
-                is DrawAreaParam -> it
-                is Float -> DrawAreaParam.Pixel(it)
-                else -> null
-            }
-        } ?: throw IllegalArgumentException("height must be DrawAreaParam or Float")
+    constructor(x: Float, y: Float, width: Float, height: Float): this(
+        x = DrawAreaParam.Pixel(x),
+        y = DrawAreaParam.Pixel(y),
+        width = DrawAreaParam.Pixel(width),
+        height = DrawAreaParam.Pixel(height)
+    )
+    constructor(x: DrawAreaParam, y: Float, width: Float, height: Float): this(
+        x = x,
+        y = DrawAreaParam.Pixel(y),
+        width = DrawAreaParam.Pixel(width),
+        height = DrawAreaParam.Pixel(height)
+    )
+    constructor(x: Float, y: DrawAreaParam, width: Float, height: Float): this(
+        x = DrawAreaParam.Pixel(x),
+        y = y,
+        width = DrawAreaParam.Pixel(width),
+        height = DrawAreaParam.Pixel(height)
+    )
+    constructor(x: Float, y: Float, width: DrawAreaParam, height: Float): this(
+        x = DrawAreaParam.Pixel(x),
+        y = DrawAreaParam.Pixel(y),
+        width = width,
+        height = DrawAreaParam.Pixel(height)
+    )
+    constructor(x: Float, y: Float, width: Float, height: DrawAreaParam): this(
+        x = DrawAreaParam.Pixel(x),
+        y = DrawAreaParam.Pixel(y),
+        width = DrawAreaParam.Pixel(width),
+        height = height
+    )
+    constructor(x: DrawAreaParam, y: DrawAreaParam, width: Float, height: Float): this(
+        x = x,
+        y = y,
+        width = DrawAreaParam.Pixel(width),
+        height = DrawAreaParam.Pixel(height)
+    )
+    constructor(x: DrawAreaParam, y: Float, width: DrawAreaParam, height: Float): this(
+        x = x,
+        y = DrawAreaParam.Pixel(y),
+        width = width,
+        height = DrawAreaParam.Pixel(height)
+    )
+    constructor(x: DrawAreaParam, y: Float, width: Float, height: DrawAreaParam): this(
+        x = x,
+        y = DrawAreaParam.Pixel(y),
+        width = DrawAreaParam.Pixel(width),
+        height = height
+    )
+    constructor(x: Float, y: DrawAreaParam, width: DrawAreaParam, height: Float): this(
+        x = DrawAreaParam.Pixel(x),
+        y = y,
+        width = width,
+        height = DrawAreaParam.Pixel(height)
+    )
+    constructor(x: Float, y: DrawAreaParam, width: Float, height: DrawAreaParam): this(
+        x = DrawAreaParam.Pixel(x),
+        y = y,
+        width = DrawAreaParam.Pixel(width),
+        height = height
+    )
+    constructor(x: Float, y: Float, width: DrawAreaParam, height: DrawAreaParam): this(
+        x = DrawAreaParam.Pixel(x),
+        y = DrawAreaParam.Pixel(y),
+        width = width,
+        height = height
+    )
+    constructor(x: DrawAreaParam, y: DrawAreaParam, width: DrawAreaParam, height: Float): this(
+        x = x,
+        y = y,
+        width = width,
+        height = DrawAreaParam.Pixel(height)
+    )
+    constructor(x: DrawAreaParam, y: DrawAreaParam, width: Float, height: DrawAreaParam): this(
+        x = x,
+        y = y,
+        width = DrawAreaParam.Pixel(width),
+        height = height
+    )
+    constructor(x: DrawAreaParam, y: Float, width: DrawAreaParam, height: DrawAreaParam): this(
+        x = x,
+        y = DrawAreaParam.Pixel(y),
+        width = width,
+        height = height
+    )
+    constructor(x: Float, y: DrawAreaParam, width: DrawAreaParam, height: DrawAreaParam): this(
+        x = DrawAreaParam.Pixel(x),
+        y = y,
+        width = width,
+        height = height
     )
 
     fun calcArea(screenWidth: Float , screenHeight: Float): Area {

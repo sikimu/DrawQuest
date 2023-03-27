@@ -1,6 +1,7 @@
 package com.sikimu.drawquest.drawdata
 
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Test
 
 internal class DrawAreaDataTest{
@@ -65,12 +66,43 @@ internal class DrawAreaDataTest{
     }
 
     @Test
-    fun testCreateDrawAreaDataWithFloat() {
-        val drawAreaData = DrawAreaData(10f, 20f, 100f, 200f)
-        val area = drawAreaData.calcArea(1280f, 720f)
-        assertEquals(10f, area.x)
-        assertEquals(20f, area.y)
-        assertEquals(100f, area.width)
-        assertEquals(200f, area.height)
+    fun testCreateDrawAreaDataPattern() {
+        val pe = DrawAreaParam.Percent(25F)
+        assertNotNull(pe)
+        val ff = 10F
+
+        var drawAreaData = DrawAreaData(pe, pe, pe, pe)
+        assertNotNull(drawAreaData)
+        drawAreaData = DrawAreaData(ff, pe, pe, pe)
+        assertNotNull(drawAreaData)
+        drawAreaData = DrawAreaData(pe, ff, pe, pe)
+        assertNotNull(drawAreaData)
+        drawAreaData = DrawAreaData(pe, pe, ff, pe)
+        assertNotNull(drawAreaData)
+        drawAreaData = DrawAreaData(pe, pe, pe, ff)
+        assertNotNull(drawAreaData)
+        drawAreaData = DrawAreaData(pe, pe, ff, ff)
+        assertNotNull(drawAreaData)
+        drawAreaData = DrawAreaData(pe, ff, pe, ff)
+        assertNotNull(drawAreaData)
+        drawAreaData = DrawAreaData(pe, ff, ff, pe)
+        assertNotNull(drawAreaData)
+        drawAreaData = DrawAreaData(ff, pe, pe, ff)
+        assertNotNull(drawAreaData)
+        drawAreaData = DrawAreaData(ff, pe, ff, pe)
+        assertNotNull(drawAreaData)
+        drawAreaData = DrawAreaData(ff, ff, pe, pe)
+        assertNotNull(drawAreaData)
+        drawAreaData = DrawAreaData(pe, ff, ff, ff)
+        assertNotNull(drawAreaData)
+        drawAreaData = DrawAreaData(ff, pe, ff, ff)
+        assertNotNull(drawAreaData)
+        drawAreaData = DrawAreaData(ff, ff, pe, ff)
+        assertNotNull(drawAreaData)
+        drawAreaData = DrawAreaData(ff, ff, ff, pe)
+        assertNotNull(drawAreaData)
+        drawAreaData = DrawAreaData(ff, ff, ff, ff)
+        assertNotNull(drawAreaData)
     }
+
 }
