@@ -99,7 +99,7 @@ data class DrawAreaData(
         height = height
     )
 
-    fun calcArea(screenWidth: Float , screenHeight: Float): Area {
+    fun calcArea(screenWidth : Int , screenHeight : Int): Area {
         val x = when (val value = x) {
             is DrawAreaParam.Pixel -> value.value
             is DrawAreaParam.Percent -> value.value * screenWidth / 100.0F
@@ -116,6 +116,29 @@ data class DrawAreaData(
             is DrawAreaParam.Pixel -> value.value
             is DrawAreaParam.Percent -> value.value * screenHeight / 100.0F
         }
-        return Area(x, y, w, h)
+        return Area(x, y, x + w, y + h)
+    }
+
+    /**
+     * 中央に合わせて座標出力
+     */
+    fun calcAreaCenter(screenWidth : Int , screenHeight : Int): Area {
+        val x = when (val value = x) {
+            is DrawAreaParam.Pixel -> value.value
+            is DrawAreaParam.Percent -> value.value * screenWidth / 100.0F
+        }
+        val y = when (val value = y) {
+            is DrawAreaParam.Pixel -> value.value
+            is DrawAreaParam.Percent -> value.value * screenHeight / 100.0F
+        }
+        val w = when (val value = width) {
+            is DrawAreaParam.Pixel -> value.value
+            is DrawAreaParam.Percent -> value.value * screenWidth / 100.0F
+        }
+        val h = when (val value = height) {
+            is DrawAreaParam.Pixel -> value.value
+            is DrawAreaParam.Percent -> value.value * screenHeight / 100.0F
+        }
+        return Area(x - (w / 2), y - (h / 2), x + (w / 2), y + (h / 2))
     }
 }

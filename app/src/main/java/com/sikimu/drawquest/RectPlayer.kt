@@ -1,7 +1,9 @@
 package com.sikimu.drawquest
 
 import android.graphics.Color
-import com.sikimu.drawquest.drawdata.FillRectData
+import com.sikimu.drawquest.drawdata.DrawAreaData
+import com.sikimu.drawquest.drawdata.DrawAreaParam
+import com.sikimu.drawquest.drawdata.FillCenterRectData
 
 class RectPlayer {
     companion object {
@@ -39,8 +41,14 @@ class RectPlayer {
         }
     }
 
-    fun getRectData(center: Vector2D): FillRectData {
-        return FillRectData(center.x - WIDTH / 2, center.y - HEIGHT / 2, WIDTH, HEIGHT, Color.BLUE)
+    fun getRectData(): FillCenterRectData {
+        return FillCenterRectData(
+            DrawAreaData(
+                DrawAreaParam.Percent(50),
+                DrawAreaParam.Percent(50),
+                WIDTH , HEIGHT
+            ),
+            Color.BLUE)
     }
 
     fun getDelta(): Vector2D {

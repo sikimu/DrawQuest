@@ -2,6 +2,7 @@ package com.sikimu.drawquest.game
 
 import android.graphics.Color
 import com.sikimu.drawquest.*
+import com.sikimu.drawquest.drawdata.DrawAreaData
 import com.sikimu.drawquest.drawdata.StrokeRectData
 import com.sikimu.drawquest.drawdata.FillRectData
 
@@ -35,7 +36,7 @@ class GameMain(system: GameSystem, motionEvent: GameMotionEvent) : Game() {
     private val player = RectPlayer()
     private var playerCenter = Vector2D(200F, 200F)
     private val enemy = RectEnemy()
-    private var enemyCenter = Vector2D(400F, 400F)
+    private var enemyCenter = Vector2D(200F, 400F)
 
     // プレイヤーと敵の表示位置
     private var playerViewCenter = getViewCenter(system, playerCenter, cameraCenter)
@@ -105,7 +106,7 @@ class GameMain(system: GameSystem, motionEvent: GameMotionEvent) : Game() {
          */
         override fun createStorage(): DrawingDataStorage {
             return DrawingDataStorage(Color.GREEN).apply {
-                addRect(player.getRectData(playerViewCenter))
+                addRect(player.getRectData())
                 addRect(enemy.getRectData(enemyViewCenter))
             }
         }
@@ -113,11 +114,11 @@ class GameMain(system: GameSystem, motionEvent: GameMotionEvent) : Game() {
 
     inner class BattleIn : Mode() {
         private var darkness = 0 // 矩形の暗さ (0: 透明, 255: 黒)
-        private var fillRectData : FillRectData = FillRectData(0F, 0F, 0F, 0F, Color.argb(darkness,0,0,0))
+        private var fillRectData : FillRectData = FillRectData(DrawAreaData(0F, 0F, 0F, 0F) , Color.argb(darkness,0,0,0))
 
         override fun update(system: GameSystem , motionEvent: GameMotionEvent): Mode {
             darkness += 8 // 暗くする速度はここで調整する
-            fillRectData = FillRectData(0F, 0F, system.getViewWidth().toFloat(), system.getViewHeight().toFloat(), Color.argb(darkness % 256, 0, 0, 0))
+            fillRectData = FillRectData(DrawAreaData(0F, 0F, system.getViewWidth().toFloat(), system.getViewHeight().toFloat()), Color.argb(darkness % 256, 0, 0, 0))
             if (darkness >= 256 * 3) {
                 // 暗さが255になったら次のモードに移行する
                 return Battle(system, motionEvent)
@@ -127,7 +128,7 @@ class GameMain(system: GameSystem, motionEvent: GameMotionEvent) : Game() {
 
         override fun createStorage(): DrawingDataStorage {
             val storage = DrawingDataStorage(Color.GREEN)
-            storage.addRect(player.getRectData(playerViewCenter))
+            storage.addRect(player.getRectData())
             storage.addRect(enemy.getRectData(enemyViewCenter))
             storage.addRect(fillRectData)
 
@@ -135,7 +136,7 @@ class GameMain(system: GameSystem, motionEvent: GameMotionEvent) : Game() {
         }
     }
 
-    inner class Battle(system: GameSystem, motionEvent: GameMotionEvent) : Mode() {
+    inner class Battle(system: GameSystem, val motionEvent: GameMotionEvent) : Mode() {
 
         // ゲーム画面の四角形を作成する
         private val enemyWindow = StrokeRectData(
@@ -148,17 +149,17 @@ class GameMain(system: GameSystem, motionEvent: GameMotionEvent) : Game() {
         )
 
         private val enemySky = FillRectData(
-            system.getViewWidth() * 0.1F, // 左端の座標
-            system.getViewHeight() * 0.1F, // 上端の座標
-            system.getViewWidth() * 0.8F, // 幅
-            ENEMY_WINDOW_HEIGHT, // 高さ
+            DrawAreaData(system.getViewWidth() * 0.1F, // 左端の座標
+                system.getViewHeight() * 0.1F, // 上端の座標
+                system.getViewWidth() * 0.8F, // 幅
+                ENEMY_WINDOW_HEIGHT), // 高さ
             Color.BLUE
         )
         private val enemyField = FillRectData(
-            system.getViewWidth() * 0.1F, // 左端の座標
+            DrawAreaData(system.getViewWidth() * 0.1F, // 左端の座標
             system.getViewHeight() * 0.1F + ENEMY_WINDOW_HEIGHT * 0.4F, // 上端の座標
             system.getViewWidth() * 0.8F, // 幅
-            ENEMY_WINDOW_HEIGHT * 0.6F, // 高さ
+            ENEMY_WINDOW_HEIGHT * 0.6F), // 高さ
             Color.GREEN
         )
 
@@ -174,6 +175,7 @@ class GameMain(system: GameSystem, motionEvent: GameMotionEvent) : Game() {
         private val enemyVector = Vector2D(system.getViewWidth() / 2F, system.getViewHeight() * 0.1F + ENEMY_WINDOW_HEIGHT * 0.7F)
 
         override fun update(system: GameSystem , motionEvent: GameMotionEvent): Mode {
+            motionEvent.toString();//TODO 警告対策
             return this
         }
 

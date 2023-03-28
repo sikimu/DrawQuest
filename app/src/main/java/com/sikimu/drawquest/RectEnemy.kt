@@ -1,7 +1,8 @@
 package com.sikimu.drawquest
 
 import android.graphics.Color
-import com.sikimu.drawquest.drawdata.FillRectData
+import com.sikimu.drawquest.drawdata.DrawAreaData
+import com.sikimu.drawquest.drawdata.FillCenterRectData
 
 class RectEnemy {
     companion object {
@@ -9,7 +10,7 @@ class RectEnemy {
         const val HEIGHT = 100f
     }
 
-    fun getRectData(center: Vector2D): FillRectData {
-        return FillRectData(center.x - WIDTH / 2, center.y - HEIGHT / 2, WIDTH, HEIGHT, Color.BLACK)
+    fun getRectData(center: Vector2D): FillCenterRectData {
+        return FillCenterRectData(DrawAreaData(center.x, center.y, WIDTH, HEIGHT), Color.BLACK)
     }
 }
