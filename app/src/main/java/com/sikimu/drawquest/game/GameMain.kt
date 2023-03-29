@@ -136,7 +136,7 @@ class GameMain(system: GameSystem, motionEvent: GameMotionEvent) : Game() {
         }
     }
 
-    inner class Battle(system: GameSystem, val motionEvent: GameMotionEvent) : Mode() {
+    inner class Battle(system: GameSystem, motionEvent: GameMotionEvent) : Mode() {
 
         // ゲーム画面の四角形を作成する
         private val enemyWindow = StrokeRectData(
@@ -163,6 +163,7 @@ class GameMain(system: GameSystem, motionEvent: GameMotionEvent) : Game() {
             Color.GREEN
         )
 
+        // プレイヤーの選択肢を表示する四角形を作成する
         private val selectWindow = StrokeRectData(
             system.getViewWidth() * 0.05F, // 左端の座標
             system.getViewHeight() * 0.6F, // 上端の座標
@@ -175,7 +176,6 @@ class GameMain(system: GameSystem, motionEvent: GameMotionEvent) : Game() {
         private val enemyVector = Vector2D(system.getViewWidth() / 2F, system.getViewHeight() * 0.1F + ENEMY_WINDOW_HEIGHT * 0.7F)
 
         override fun update(system: GameSystem , motionEvent: GameMotionEvent): Mode {
-            motionEvent.toString();//TODO 警告対策
             return this
         }
 
