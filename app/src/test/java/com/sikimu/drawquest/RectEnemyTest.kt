@@ -1,6 +1,7 @@
 package com.sikimu.drawquest
 
 import android.graphics.Color
+import com.sikimu.drawquest.drawdata.DrawAreaParam
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -10,10 +11,10 @@ class RectEnemyTest {
     fun testGetRectData() {
         val enemy = RectEnemy()
         val rectData = enemy.getRectData(Vector2D(50F, 100F))
-        assertEquals(0f, rectData.x)
-        assertEquals(50f, rectData.y)
-        assertEquals(100f, rectData.width)
-        assertEquals(100f, rectData.height)
+        assertEquals(DrawAreaParam.Pixel(50F), rectData.drawAreaData.x)
+        assertEquals(DrawAreaParam.Pixel(100F), rectData.drawAreaData.y)
+        assertEquals(DrawAreaParam.Pixel(100F), rectData.drawAreaData.width)
+        assertEquals(DrawAreaParam.Pixel(100F), rectData.drawAreaData.height)
         assertEquals(Color.BLACK, rectData.color)
     }
 }

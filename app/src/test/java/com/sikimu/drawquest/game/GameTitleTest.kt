@@ -3,6 +3,7 @@ import com.sikimu.drawquest.GameMotionEvent
 import com.sikimu.drawquest.GameSystem
 import com.sikimu.drawquest.drawdata.FillRectData
 import com.sikimu.drawquest.Vector2D
+import com.sikimu.drawquest.drawdata.DrawAreaData
 import com.sikimu.drawquest.game.GameMain
 import com.sikimu.drawquest.game.GameTitle
 import junit.framework.TestCase.assertTrue
@@ -45,7 +46,7 @@ class GameTitleTest {
         assertEquals(result.getBackgroundColor(), Color.YELLOW)
 
         // ボタンの矩形があることを確認
-        val rect = FillRectData(100F,500F,500F,100F, Color.WHITE)
+        val rect = FillRectData(DrawAreaData(100F,500F,500F,100F) , Color.WHITE)
         assertEquals(result.getStorage()[0] , rect)
     }
 }

@@ -43,11 +43,11 @@ internal class DrawAreaDataTest{
             width = DrawAreaParam.Pixel(100F),
             height = DrawAreaParam.Pixel(200F)
         )
-        val area = drawAreaData.calcArea(800F, 600F)
-        assertEquals(50F, area.x)
-        assertEquals(50F, area.y)
-        assertEquals(100F, area.width)
-        assertEquals(200F, area.height)
+        val area = drawAreaData.calcArea(800, 600)
+        assertEquals(50F, area.left)
+        assertEquals(50F, area.top)
+        assertEquals(150F, area.right)
+        assertEquals(250F, area.bottom)
     }
 
     @Test
@@ -58,11 +58,11 @@ internal class DrawAreaDataTest{
             width = DrawAreaParam.Percent(50F),
             height = DrawAreaParam.Percent(25F)
         )
-        val area = drawAreaData.calcArea(800F, 600F)
-        assertEquals(200F, area.x)
-        assertEquals(300F, area.y)
-        assertEquals(400F, area.width)
-        assertEquals(150F, area.height)
+        val area = drawAreaData.calcArea(800, 600)
+        assertEquals(200F, area.left)
+        assertEquals(300F, area.top)
+        assertEquals(600F, area.right)
+        assertEquals(450F, area.bottom)
     }
 
     @Test

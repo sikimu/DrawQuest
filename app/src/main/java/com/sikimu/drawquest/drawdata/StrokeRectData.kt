@@ -4,24 +4,17 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.RectF
 
-data class StrokeRectData(
-    var x: Float , var y: Float ,
-    val width: Float , val height: Float ,
-    val strokeWidth: Float,
-    val color: Int) : DrawData() {
-    fun getCenterX() = x + width / 2
-    fun getCenterY() = y + height / 2
-    private fun getBottom() = y + height
-    private fun getTop() = y
-    private fun getLeft() = x
-    private fun getRight() = x + width
+/**
+ * DrawAreaDataを使った矩形描画クラス
+ */
+data class StrokeRectData(val drawAreaData : DrawAreaData, val color: Int, val strokeWidth: Float) : DrawData() {
 
     override fun draw(canvas : Canvas , paint : Paint) {
-
-        val rect = RectF(getLeft(), getTop(), getRight(), getBottom())
-        paint.strokeWidth = strokeWidth
         paint.color = color
         paint.style = Paint.Style.STROKE
-        canvas.drawRect(rect, paint)
+        paint.strokeWidth = strokeWidth
+        val area = drawAreaData.calcArea(canvas.width, canvas.height)
+        val rect = RectF(area.left, area.top, area.right, area.bottom)
+        canvas.drawRect(rect, paint) // rectListに格納された矩形を描画
     }
 }

@@ -8,7 +8,8 @@ import kotlin.math.sqrt
  * @property x ベクトルの x 成分
  * @property y ベクトルの y 成分
  */
-data class Vector2D(var x: Float , var y: Float) {
+data class
+Vector2D(var x: Float , var y: Float) {
 
     /**
      * 他のベクトルとの加算結果を返します。

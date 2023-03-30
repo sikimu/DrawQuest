@@ -3,6 +3,7 @@ package com.sikimu.drawquest.game
 import android.graphics.Color
 import com.sikimu.drawquest.*
 import com.sikimu.drawquest.drawdata.DrawAreaData
+import com.sikimu.drawquest.drawdata.DrawAreaParam
 import com.sikimu.drawquest.drawdata.StrokeRectData
 import com.sikimu.drawquest.drawdata.FillRectData
 
@@ -138,39 +139,50 @@ class GameMain(system: GameSystem, motionEvent: GameMotionEvent) : Game() {
 
     inner class Battle(system: GameSystem, motionEvent: GameMotionEvent) : Mode() {
 
-        // ゲーム画面の四角形を作成する
+        // 敵を表示する矩形の描画データ
         private val enemyWindow = StrokeRectData(
-            system.getViewWidth() * 0.1F, // 左端の座標
-            system.getViewHeight() * 0.1F, // 上端の座標
-            system.getViewWidth() * 0.8F, // 幅
-            ENEMY_WINDOW_HEIGHT, // 高さ
-            40F,
-            Color.WHITE
+            DrawAreaData(
+                DrawAreaParam.Percent(10),
+                DrawAreaParam.Percent(10),
+                DrawAreaParam.Percent(80),
+                ENEMY_WINDOW_HEIGHT
+            ),
+            Color.WHITE,
+            10F
         )
 
+        // 敵ウィンドウの背景(空)
         private val enemySky = FillRectData(
-            DrawAreaData(system.getViewWidth() * 0.1F, // 左端の座標
-                system.getViewHeight() * 0.1F, // 上端の座標
-                system.getViewWidth() * 0.8F, // 幅
-                ENEMY_WINDOW_HEIGHT), // 高さ
+            DrawAreaData(
+                DrawAreaParam.Percent(10),
+                DrawAreaParam.Percent(10),
+                DrawAreaParam.Percent(80),
+                ENEMY_WINDOW_HEIGHT * 0.3F
+            ),
             Color.BLUE
         )
+
+        //敵ウィンドウの背景(地上)
         private val enemyField = FillRectData(
-            DrawAreaData(system.getViewWidth() * 0.1F, // 左端の座標
-            system.getViewHeight() * 0.1F + ENEMY_WINDOW_HEIGHT * 0.4F, // 上端の座標
-            system.getViewWidth() * 0.8F, // 幅
-            ENEMY_WINDOW_HEIGHT * 0.6F), // 高さ
+            DrawAreaData(
+                DrawAreaParam.Percent(10),
+                DrawAreaParam.Percent(10),//TODO オフセット作らないと無理だけどどうするか、、、 + ENEMY_WINDOW_HEIGHT * 0.3F,
+                DrawAreaParam.Percent(80),
+                ENEMY_WINDOW_HEIGHT * 0.7F
+            ),
             Color.GREEN
         )
 
-        // プレイヤーの選択肢を表示する四角形を作成する
+        //選択ウィンドウ
         private val selectWindow = StrokeRectData(
-            system.getViewWidth() * 0.05F, // 左端の座標
-            system.getViewHeight() * 0.6F, // 上端の座標
-            system.getViewWidth() * 0.9F, // 幅
-            SELECT_WINDOW_HEIGHT, // 高さ
-            40F,
-            Color.WHITE
+            DrawAreaData(
+                DrawAreaParam.Percent(5),
+                DrawAreaParam.Percent(60),//TODO オフセット作らないと無理だけどどうするか、、、 + ENEMY_WINDOW_HEIGHT * 0.3F,
+                DrawAreaParam.Percent(80),
+                SELECT_WINDOW_HEIGHT
+            ),
+            Color.WHITE,
+            10F
         )
 
         private val enemyVector = Vector2D(system.getViewWidth() / 2F, system.getViewHeight() * 0.1F + ENEMY_WINDOW_HEIGHT * 0.7F)
