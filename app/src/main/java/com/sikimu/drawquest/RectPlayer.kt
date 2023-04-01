@@ -2,7 +2,7 @@ package com.sikimu.drawquest
 
 import android.graphics.Color
 import com.sikimu.drawquest.drawdata.DrawAreaData
-import com.sikimu.drawquest.drawdata.DrawAreaParam
+import com.sikimu.drawquest.drawdata.DrawParam
 import com.sikimu.drawquest.drawdata.FillCenterRectData
 
 class RectPlayer {
@@ -44,8 +44,8 @@ class RectPlayer {
     fun getRectData(): FillCenterRectData {
         return FillCenterRectData(
             DrawAreaData(
-                DrawAreaParam.Percent(50),
-                DrawAreaParam.Percent(50),
+                DrawParam.ScreenW * 0.5F,
+                DrawParam.ScreenH * 0.5F,
                 WIDTH , HEIGHT
             ),
             Color.BLUE)

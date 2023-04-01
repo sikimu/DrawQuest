@@ -8,40 +8,25 @@ internal class DrawAreaDataTest{
     @Test
     fun `test DrawAreaData constructor with Pixels`() {
         val drawAreaData = DrawAreaData(
-            x = DrawAreaParam.Pixel(10f),
-            y = DrawAreaParam.Pixel(20f),
-            width = DrawAreaParam.Pixel(100f),
-            height = DrawAreaParam.Pixel(200f)
+            x = DrawParam.Pixel(10f),
+            y = DrawParam.Pixel(20f),
+            width = DrawParam.Pixel(100f),
+            height = DrawParam.Pixel(200f)
         )
 
-        assertEquals(DrawAreaParam.Pixel(10f), drawAreaData.x)
-        assertEquals(DrawAreaParam.Pixel(20f), drawAreaData.y)
-        assertEquals(DrawAreaParam.Pixel(100f), drawAreaData.width)
-        assertEquals(DrawAreaParam.Pixel(200f), drawAreaData.height)
-    }
-
-    @Test
-    fun `test DrawAreaData constructor with Percents`() {
-        val drawAreaData = DrawAreaData(
-            x = DrawAreaParam.Percent(10),
-            y = DrawAreaParam.Percent(10),
-            width = DrawAreaParam.Percent(75f),
-            height = DrawAreaParam.Percent(10f)
-        )
-
-        assertEquals(DrawAreaParam.Percent(10), drawAreaData.x)
-        assertEquals(DrawAreaParam.Percent(10), drawAreaData.y)
-        assertEquals(DrawAreaParam.Percent(75f), drawAreaData.width)
-        assertEquals(DrawAreaParam.Percent(10f), drawAreaData.height)
+        assertEquals(DrawParam.Pixel(10f), drawAreaData.x)
+        assertEquals(DrawParam.Pixel(20f), drawAreaData.y)
+        assertEquals(DrawParam.Pixel(100f), drawAreaData.width)
+        assertEquals(DrawParam.Pixel(200f), drawAreaData.height)
     }
 
     @Test
     fun `toArea returns a valid Area for Pixel values`() {
         val drawAreaData = DrawAreaData(
-            x = DrawAreaParam.Pixel(50F),
-            y = DrawAreaParam.Pixel(50F),
-            width = DrawAreaParam.Pixel(100F),
-            height = DrawAreaParam.Pixel(200F)
+            x = DrawParam.Pixel(50F),
+            y = DrawParam.Pixel(50F),
+            width = DrawParam.Pixel(100F),
+            height = DrawParam.Pixel(200F)
         )
         val area = drawAreaData.calcArea(800, 600)
         assertEquals(50F, area.left)
@@ -51,23 +36,8 @@ internal class DrawAreaDataTest{
     }
 
     @Test
-    fun `toArea returns a valid Area for Percent values`() {
-        val drawAreaData = DrawAreaData(
-            x = DrawAreaParam.Percent(25F),
-            y = DrawAreaParam.Percent(50F),
-            width = DrawAreaParam.Percent(50F),
-            height = DrawAreaParam.Percent(25F)
-        )
-        val area = drawAreaData.calcArea(800, 600)
-        assertEquals(200F, area.left)
-        assertEquals(300F, area.top)
-        assertEquals(600F, area.right)
-        assertEquals(450F, area.bottom)
-    }
-
-    @Test
     fun testCreateDrawAreaDataPattern() {
-        val pe = DrawAreaParam.Percent(25F)
+        val pe = DrawParam.Pixel(25F)
         assertNotNull(pe)
         val ff = 10F
 

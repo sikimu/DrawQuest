@@ -3,7 +3,7 @@ package com.sikimu.drawquest.game
 import android.graphics.Color
 import com.sikimu.drawquest.*
 import com.sikimu.drawquest.drawdata.DrawAreaData
-import com.sikimu.drawquest.drawdata.DrawAreaParam
+import com.sikimu.drawquest.drawdata.DrawParam
 import com.sikimu.drawquest.drawdata.StrokeRectData
 import com.sikimu.drawquest.drawdata.FillRectData
 
@@ -142,9 +142,9 @@ class GameMain(system: GameSystem, motionEvent: GameMotionEvent) : Game() {
         // 敵を表示する矩形の描画データ
         private val enemyWindow = StrokeRectData(
             DrawAreaData(
-                DrawAreaParam.Percent(10),
-                DrawAreaParam.Percent(10),
-                DrawAreaParam.Percent(80),
+                DrawParam.ScreenW * 0.1F,
+                DrawParam.ScreenH * 0.1F,
+                DrawParam.ScreenW * 0.8F,
                 ENEMY_WINDOW_HEIGHT
             ),
             Color.WHITE,
@@ -154,9 +154,9 @@ class GameMain(system: GameSystem, motionEvent: GameMotionEvent) : Game() {
         // 敵ウィンドウの背景(空)
         private val enemySky = FillRectData(
             DrawAreaData(
-                DrawAreaParam.Percent(10),
-                DrawAreaParam.Percent(10),
-                DrawAreaParam.Percent(80),
+                DrawParam.ScreenW * 0.1F,
+                DrawParam.ScreenH * 0.1F,
+                DrawParam.ScreenW * 0.8F,
                 ENEMY_WINDOW_HEIGHT * 0.3F
             ),
             Color.BLUE
@@ -165,9 +165,9 @@ class GameMain(system: GameSystem, motionEvent: GameMotionEvent) : Game() {
         //敵ウィンドウの背景(地上)
         private val enemyField = FillRectData(
             DrawAreaData(
-                DrawAreaParam.Percent(10),
-                DrawAreaParam.Percent(10),//TODO オフセット作らないと無理だけどどうするか、、、 + ENEMY_WINDOW_HEIGHT * 0.3F,
-                DrawAreaParam.Percent(80),
+                DrawParam.ScreenW * 0.1F,
+                DrawParam.ScreenH * 0.1F + ENEMY_WINDOW_HEIGHT * 0.3F,
+                DrawParam.ScreenW * 0.8F,
                 ENEMY_WINDOW_HEIGHT * 0.7F
             ),
             Color.GREEN
@@ -176,9 +176,9 @@ class GameMain(system: GameSystem, motionEvent: GameMotionEvent) : Game() {
         //選択ウィンドウ
         private val selectWindow = StrokeRectData(
             DrawAreaData(
-                DrawAreaParam.Percent(5),
-                DrawAreaParam.Percent(60),//TODO オフセット作らないと無理だけどどうするか、、、 + ENEMY_WINDOW_HEIGHT * 0.3F,
-                DrawAreaParam.Percent(80),
+                DrawParam.ScreenW * 0.05F,
+                DrawParam.ScreenH * 0.6F,
+                DrawParam.ScreenW * 0.9F,
                 SELECT_WINDOW_HEIGHT
             ),
             Color.WHITE,
