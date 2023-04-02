@@ -18,17 +18,6 @@ class GameMain(system: GameSystem, motionEvent: GameMotionEvent) : Game() {
     companion object{
         const val ENEMY_WINDOW_HEIGHT = 800F
         const val SELECT_WINDOW_HEIGHT = 400F
-
-        /**
-         * カメラ中心から指定した位置までの距離を考慮した表示位置を取得する
-         *
-         * @param system ゲームのシステム
-         * @param center 表示するオブジェクトの中心座標
-         * @return カメラ中心から指定した位置までの距離を考慮した表示位置
-         */
-        fun getViewCenter(system: GameSystem, center: Vector2D, cameraCenter: Vector2D): Vector2D {
-            return Vector2D(system.getViewWidth() / 2F, system.getViewHeight() / 2F) + (center - cameraCenter)
-        }
     }
 
     /** カメラ中央位置 */
@@ -40,8 +29,8 @@ class GameMain(system: GameSystem, motionEvent: GameMotionEvent) : Game() {
     private var enemyCenter = Vector2D(200F, 400F)
 
     // プレイヤーと敵の表示位置
-    private var playerViewCenter = getViewCenter(system, playerCenter, cameraCenter)
-    private var enemyViewCenter = getViewCenter(system, enemyCenter, cameraCenter)
+    private var enemyViewCenterX = (DrawParam.ScreenW * 0.5F) + (enemyCenter.x - cameraCenter.x)
+    private var enemyViewCenterY = (DrawParam.ScreenH * 0.5F) + (enemyCenter.y - cameraCenter.y)
 
     private var mode : Mode = Field()
 
@@ -94,8 +83,9 @@ class GameMain(system: GameSystem, motionEvent: GameMotionEvent) : Game() {
                 nextMode = BattleIn()
             }
 
-            playerViewCenter = getViewCenter(system, playerCenter, cameraCenter)
-            enemyViewCenter = getViewCenter(system, enemyCenter, cameraCenter)
+
+            enemyViewCenterX = (DrawParam.ScreenW * 0.5F) + (enemyCenter.x - cameraCenter.x)
+            enemyViewCenterY = (DrawParam.ScreenH * 0.5F) + (enemyCenter.y - cameraCenter.y)
 
             return nextMode
         }
@@ -108,7 +98,7 @@ class GameMain(system: GameSystem, motionEvent: GameMotionEvent) : Game() {
         override fun createStorage(): DrawingDataStorage {
             return DrawingDataStorage(Color.GREEN).apply {
                 addRect(player.getRectData())
-                addRect(enemy.getRectData(enemyViewCenter))
+                addRect(enemy.getRectData(enemyViewCenterX, enemyViewCenterY))
             }
         }
     }
@@ -122,7 +112,7 @@ class GameMain(system: GameSystem, motionEvent: GameMotionEvent) : Game() {
             fillRectData = FillRectData(DrawAreaData(0F, 0F, system.getViewWidth().toFloat(), system.getViewHeight().toFloat()), Color.argb(darkness % 256, 0, 0, 0))
             if (darkness >= 256 * 3) {
                 // 暗さが255になったら次のモードに移行する
-                return Battle(system, motionEvent)
+                return Battle()
             }
             return this
         }
@@ -130,14 +120,14 @@ class GameMain(system: GameSystem, motionEvent: GameMotionEvent) : Game() {
         override fun createStorage(): DrawingDataStorage {
             val storage = DrawingDataStorage(Color.GREEN)
             storage.addRect(player.getRectData())
-            storage.addRect(enemy.getRectData(enemyViewCenter))
+            storage.addRect(enemy.getRectData(enemyViewCenterX, enemyViewCenterY))
             storage.addRect(fillRectData)
 
             return storage
         }
     }
 
-    inner class Battle(system: GameSystem, motionEvent: GameMotionEvent) : Mode() {
+    inner class Battle() : Mode() {
 
         // 敵を表示する矩形の描画データ
         private val enemyWindow = StrokeRectData(
@@ -185,8 +175,6 @@ class GameMain(system: GameSystem, motionEvent: GameMotionEvent) : Game() {
             10F
         )
 
-        private val enemyVector = Vector2D(system.getViewWidth() / 2F, system.getViewHeight() * 0.1F + ENEMY_WINDOW_HEIGHT * 0.7F)
-
         override fun update(system: GameSystem , motionEvent: GameMotionEvent): Mode {
             return this
         }
@@ -198,7 +186,7 @@ class GameMain(system: GameSystem, motionEvent: GameMotionEvent) : Game() {
             storage.addRect(enemyField)
             storage.addRect(enemyWindow)
             storage.addRect(selectWindow)
-            storage.addRect(enemy.getRectData(enemyVector))
+            storage.addRect(enemy.getRectData(DrawParam.ScreenW / 2F, DrawParam.ScreenH * 0.1F + ENEMY_WINDOW_HEIGHT * 0.7F))
 
             return storage
         }
