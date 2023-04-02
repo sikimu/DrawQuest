@@ -1,16 +1,20 @@
 package com.sikimu.drawquest.drawdata
 
+/**
+ * 描画用パラメータ
+ * Pixel、ScreenW、ScreenHをサポートしています。
+ * 四則演算も可能です。
+ *
+ * @see DrawParam.Pixel
+ * @see DrawParam.ScreenW
+ * @see DrawParam.ScreenH
+ */
 sealed class DrawParam {
 
     /**
      * ピクセル
      */
     data class Pixel(val value: Float) : DrawParam()
-
-    /**
-     * 式(四則演算経由で生成される)
-     */
-    private data class Expression(val value1: DrawParam, val operator: DrawOperator, val value2 : DrawParam) : DrawParam()
 
     /**
      * 画面横幅
@@ -22,7 +26,15 @@ sealed class DrawParam {
     object ScreenH : DrawParam()
 
     /**
-     * パラメータの計算
+     * 式(四則演算経由で生成される)
+     */
+    private data class Expression(val value1: DrawParam, val operator: DrawOperator, val value2 : DrawParam) : DrawParam()
+
+    /**
+     * 描画用のパラメータを計算します。
+     * @param screenW 画面横幅
+     * @param screenH 画面縦幅
+     * @return 描画用のパラメータ
      */
     fun calc(screenW: Int, screenH: Int): Float {
         return when (this) {
@@ -113,6 +125,7 @@ sealed class DrawParam {
     operator fun div(param: DrawParam): DrawParam {
         return Expression(this, DrawOperator.Divide, param)
     }
+
     /**
      * 割り算の登録
      */
