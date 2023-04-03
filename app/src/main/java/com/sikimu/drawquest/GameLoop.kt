@@ -18,7 +18,7 @@ class GameLoop(private val system: GameSystem) : Runnable {
 
             // ゲームの状態を更新する処理を実装する
             // 経過時間をelapsedTimeで考慮して、1回分の更新を行う
-            game = game.update(system, motionEvent)
+            game = game.update(motionEvent)
             val rectStorage = game.createStorage()
             system.draw(rectStorage)
 

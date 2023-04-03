@@ -10,10 +10,9 @@ import com.sikimu.drawquest.drawdata.FillRectData
 /**
  * ゲームのメインクラス
  *
- * @param system ゲームのシステム
  * @param motionEvent ゲームの入力
  */
-class GameMain(system: GameSystem, motionEvent: GameMotionEvent) : Game() {
+class GameMain(motionEvent: GameMotionEvent) : Game() {
 
     companion object{
         const val ENEMY_WINDOW_HEIGHT = 800F
@@ -35,19 +34,18 @@ class GameMain(system: GameSystem, motionEvent: GameMotionEvent) : Game() {
     private var mode : Mode = Field()
 
     init {
-        update(system, motionEvent)
+        update(motionEvent)
     }
 
     /**
      * ゲームの状態を更新する
      *
-     * @param system ゲームのシステム
      * @param motionEvent ゲームの入力
      * @return ゲームの状態
      */
-    override fun update(system: GameSystem, motionEvent: GameMotionEvent): Game {
+    override fun update(motionEvent: GameMotionEvent): Game {
 
-        mode = mode.update(system, motionEvent)
+        mode = mode.update(motionEvent)
 
         return this
     }
@@ -62,13 +60,13 @@ class GameMain(system: GameSystem, motionEvent: GameMotionEvent) : Game() {
     }
 
     abstract inner class Mode {
-        abstract fun update(system : GameSystem , motionEvent: GameMotionEvent) : Mode
+        abstract fun update(motionEvent: GameMotionEvent) : Mode
         abstract fun createStorage(): DrawingDataStorage
     }
 
     inner class Field : Mode() {
 
-        override fun update(system: GameSystem , motionEvent: GameMotionEvent): Mode {
+        override fun update(motionEvent: GameMotionEvent): Mode {
 
             var nextMode : Mode = this
 
@@ -107,9 +105,9 @@ class GameMain(system: GameSystem, motionEvent: GameMotionEvent) : Game() {
         private var darkness = 0 // 矩形の暗さ (0: 透明, 255: 黒)
         private var fillRectData : FillRectData = FillRectData(DrawAreaData(0F, 0F, 0F, 0F) , Color.argb(darkness,0,0,0))
 
-        override fun update(system: GameSystem , motionEvent: GameMotionEvent): Mode {
+        override fun update(motionEvent: GameMotionEvent): Mode {
             darkness += 8 // 暗くする速度はここで調整する
-            fillRectData = FillRectData(DrawAreaData(0F, 0F, system.getViewWidth().toFloat(), system.getViewHeight().toFloat()), Color.argb(darkness % 256, 0, 0, 0))
+            fillRectData = FillRectData(DrawAreaData(0F, 0F, DrawParam.ScreenW, DrawParam.ScreenH), Color.argb(darkness % 256, 0, 0, 0))
             if (darkness >= 256 * 3) {
                 // 暗さが255になったら次のモードに移行する
                 return Battle()
@@ -175,7 +173,7 @@ class GameMain(system: GameSystem, motionEvent: GameMotionEvent) : Game() {
             10F
         )
 
-        override fun update(system: GameSystem , motionEvent: GameMotionEvent): Mode {
+        override fun update(motionEvent: GameMotionEvent): Mode {
             return this
         }
 

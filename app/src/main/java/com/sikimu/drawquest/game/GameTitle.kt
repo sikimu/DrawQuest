@@ -9,11 +9,11 @@ class GameTitle : Game(){
 
     private val button = HitData(100F, 500F, 600F, 600F)
 
-    override fun update(system : GameSystem , motionEvent : GameMotionEvent) : Game {
+    override fun update(motionEvent : GameMotionEvent) : Game {
 
         if(motionEvent.action == GameMotionEvent.Action.UP) {
             if (button.contains(motionEvent)) {
-                return GameMain(system, motionEvent)
+                return GameMain(motionEvent)
             }
         }
 
