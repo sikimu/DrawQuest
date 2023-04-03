@@ -28,7 +28,7 @@ class GameMain(system: GameSystem, motionEvent: GameMotionEvent) : Game() {
     private val enemy = RectEnemy()
     private var enemyCenter = Vector2D(200F, 400F)
 
-    // プレイヤーと敵の表示位置
+    // 敵の表示位置
     private var enemyViewCenterX = (DrawParam.ScreenW * 0.5F) + (enemyCenter.x - cameraCenter.x)
     private var enemyViewCenterY = (DrawParam.ScreenH * 0.5F) + (enemyCenter.y - cameraCenter.y)
 
