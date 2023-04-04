@@ -25,7 +25,7 @@ class GameLoopTest {
     @Test
     fun testOnTouchEvent_downAction() {
         // setup
-        val gameLoop = GameLoop(GameSystem(view, Handler(Looper.getMainLooper()), updateInterval))
+        val gameLoop = GameLoop(GameHandler(view, Handler(Looper.getMainLooper()), updateInterval))
         val builder = MotionEventBuilder.newBuilder()
         builder.setPointer(100F,100F)
         builder.setAction(MotionEvent.ACTION_DOWN)
@@ -47,7 +47,7 @@ class GameLoopTest {
     @Test
     fun testOnTouchEvent_upAction() {
         // setup
-        val gameLoop = GameLoop(GameSystem(view, Handler(Looper.getMainLooper()), updateInterval))
+        val gameLoop = GameLoop(GameHandler(view, Handler(Looper.getMainLooper()), updateInterval))
         val builder = MotionEventBuilder.newBuilder()
         builder.setAction(MotionEvent.ACTION_UP)
         builder.setPointer(150F,150F)
@@ -69,7 +69,7 @@ class GameLoopTest {
     @Test
     fun testOnTouchEvent_moveAction() {
         // setup
-        val gameLoop = GameLoop(GameSystem(view, Handler(Looper.getMainLooper()), updateInterval))
+        val gameLoop = GameLoop(GameHandler(view, Handler(Looper.getMainLooper()), updateInterval))
         val builder = MotionEventBuilder.newBuilder()
         builder.setPointer(200F,200F)
         builder.setAction(MotionEvent.ACTION_MOVE)
@@ -91,7 +91,7 @@ class GameLoopTest {
     @Test
     fun testOnTouchEvent_downMoveUpAction() {
         // setup
-        val gameLoop = GameLoop(GameSystem(view, Handler(Looper.getMainLooper()), updateInterval))
+        val gameLoop = GameLoop(GameHandler(view, Handler(Looper.getMainLooper()), updateInterval))
         val builder = MotionEventBuilder.newBuilder()
         builder.setPointer(100F,100F)
         builder.setAction(MotionEvent.ACTION_DOWN)

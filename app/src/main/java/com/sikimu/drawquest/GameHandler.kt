@@ -2,7 +2,7 @@ package com.sikimu.drawquest
 
 import android.os.Handler
 
-class GameSystem(private val mainView: MainView , private val handler: Handler , private val updateInterval: Long) {
+class GameHandler(private val mainView: MainView , private val handler: Handler , private val updateInterval: Long) {
 
     fun draw(storage : DrawingDataStorage){
         mainView.draw(storage)

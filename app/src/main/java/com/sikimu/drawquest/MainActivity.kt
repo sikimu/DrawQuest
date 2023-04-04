@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
 
         mainView = findViewById(R.id.view) // mainView変数にMainViewのインスタンスを設定する
 
-        gameLoop = GameLoop(GameSystem(mainView, Handler(Looper.getMainLooper()), 16))
+        gameLoop = GameLoop(GameHandler(mainView, Handler(Looper.getMainLooper()), 16))
     }
 
     override fun onResume() {

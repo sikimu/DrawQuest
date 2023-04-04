@@ -4,7 +4,7 @@ import android.view.MotionEvent
 import com.sikimu.drawquest.game.Game
 import com.sikimu.drawquest.game.GameTitle
 
-class GameLoop(private val system: GameSystem) : Runnable {
+class GameLoop(private val system: GameHandler) : Runnable {
     val motionEvent = GameMotionEvent(Vector2D(0F,0F) , GameMotionEvent.Action.FREE)
     private var isRunning = false
     private var lastUpdateTime = System.currentTimeMillis()
