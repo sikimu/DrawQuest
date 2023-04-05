@@ -2,36 +2,26 @@ package com.sikimu.drawquest.game
 
 import android.graphics.Color
 import com.sikimu.drawquest.*
-import com.sikimu.drawquest.drawdata.DrawAreaData
 import com.sikimu.drawquest.drawdata.DrawParam
-import com.sikimu.drawquest.drawdata.StrokeRectData
-import com.sikimu.drawquest.drawdata.FillRectData
 
 /**
  * ゲームのメインクラス
  *
  * @param motionEvent ゲームの入力
  */
-class GameMain(motionEvent: GameMotionEvent) : Game() {
+class GameMain(worldData : WorldData , motionEvent: GameMotionEvent) : Game() {
 
     companion object{
         const val ENEMY_WINDOW_HEIGHT = 800F
         const val SELECT_WINDOW_HEIGHT = 400F
     }
 
-    /**
-     * 世界全体の情報
-     */
-    private val wordData = WordData()
-
     // 敵の表示位置
-    private var enemyViewCenterX = (DrawParam.ScreenW * 0.5F) + (wordData.enemyCenter.x - wordData.cameraCenter.x)
-    private var enemyViewCenterY = (DrawParam.ScreenH * 0.5F) + (wordData.enemyCenter.y - wordData.cameraCenter.y)
-
-    private var mode : Mode = Field()
+    private var enemyViewCenterX = (DrawParam.ScreenW * 0.5F) + (worldData.enemyCenter.x - worldData.cameraCenter.x)
+    private var enemyViewCenterY = (DrawParam.ScreenH * 0.5F) + (worldData.enemyCenter.y - worldData.cameraCenter.y)
 
     init {
-        update(motionEvent)
+        update(worldData, motionEvent)
     }
 
     /**
@@ -40,9 +30,22 @@ class GameMain(motionEvent: GameMotionEvent) : Game() {
      * @param motionEvent ゲームの入力
      * @return ゲームの状態
      */
-    override fun update(motionEvent: GameMotionEvent): Game {
+    override fun update(worldData : WorldData , motionEvent: GameMotionEvent): Game {
 
-        mode = mode.update(motionEvent)
+        worldData.player.update(motionEvent)
+
+        worldData.playerCenter += worldData.player.getDelta()
+        worldData.cameraCenter = worldData.playerCenter
+
+        // プレイヤーと敵が近すぎる場合、プレイヤーの位置を調整する
+        if ((worldData.playerCenter - worldData.enemyCenter).magnitude() < (RectPlayer.WIDTH / 2 + RectEnemy.WIDTH / 2)) {
+            worldData.playerCenter += ((worldData.playerCenter - worldData.enemyCenter).normalize() * (RectPlayer.WIDTH / 2 + RectEnemy.WIDTH / 2) - (worldData.playerCenter - worldData.enemyCenter))
+            return GameBattleIn(worldData)
+        }
+
+        // 敵の表示位置を更新する
+        enemyViewCenterX = (DrawParam.ScreenW * 0.5F) + (worldData.enemyCenter.x - worldData.cameraCenter.x)
+        enemyViewCenterY = (DrawParam.ScreenH * 0.5F) + (worldData.enemyCenter.y - worldData.cameraCenter.y)
 
         return this
     }
@@ -52,138 +55,11 @@ class GameMain(motionEvent: GameMotionEvent) : Game() {
      *
      * @return 描画データ
      */
-    override fun createStorage(): DrawingDataStorage {
-        return mode.createStorage()
-    }
+    override fun createStorage(worldData : WorldData): DrawingDataStorage {
 
-    abstract inner class Mode {
-        abstract fun update(motionEvent: GameMotionEvent) : Mode
-        abstract fun createStorage(): DrawingDataStorage
-    }
-
-    inner class Field : Mode() {
-
-        override fun update(motionEvent: GameMotionEvent): Mode {
-
-            var nextMode : Mode = this
-
-            wordData.player.update(motionEvent)
-
-            wordData.playerCenter += wordData.player.getDelta()
-            wordData.cameraCenter = wordData.playerCenter
-
-            // プレイヤーと敵が近すぎる場合、プレイヤーの位置を調整する
-            if ((wordData.playerCenter - wordData.enemyCenter).magnitude() < (RectPlayer.WIDTH / 2 + RectEnemy.WIDTH / 2)) {
-                wordData.playerCenter += ((wordData.playerCenter - wordData.enemyCenter).normalize() * (RectPlayer.WIDTH / 2 + RectEnemy.WIDTH / 2) - (wordData.playerCenter - wordData.enemyCenter))
-                nextMode = BattleIn()
-            }
-
-
-            enemyViewCenterX = (DrawParam.ScreenW * 0.5F) + (wordData.enemyCenter.x - wordData.cameraCenter.x)
-            enemyViewCenterY = (DrawParam.ScreenH * 0.5F) + (wordData.enemyCenter.y - wordData.cameraCenter.y)
-
-            return nextMode
-        }
-
-        /**
-         * 描画データの作成
-         *
-         * @return 描画データ
-         */
-        override fun createStorage(): DrawingDataStorage {
-            return DrawingDataStorage(Color.GREEN).apply {
-                addRect(wordData.player.getRectData())
-                addRect(wordData.enemy.getRectData(enemyViewCenterX, enemyViewCenterY))
-            }
-        }
-    }
-
-    inner class BattleIn : Mode() {
-        private var darkness = 0 // 矩形の暗さ (0: 透明, 255: 黒)
-        private var fillRectData : FillRectData = FillRectData(DrawAreaData(0F, 0F, 0F, 0F) , Color.argb(darkness,0,0,0))
-
-        override fun update(motionEvent: GameMotionEvent): Mode {
-            darkness += 8 // 暗くする速度はここで調整する
-            fillRectData = FillRectData(DrawAreaData(0F, 0F, DrawParam.ScreenW, DrawParam.ScreenH), Color.argb(darkness % 256, 0, 0, 0))
-            if (darkness >= 256 * 3) {
-                // 暗さが255になったら次のモードに移行する
-                return Battle()
-            }
-            return this
-        }
-
-        override fun createStorage(): DrawingDataStorage {
-            val storage = DrawingDataStorage(Color.GREEN)
-            storage.addRect(wordData.player.getRectData())
-            storage.addRect(wordData.enemy.getRectData(enemyViewCenterX, enemyViewCenterY))
-            storage.addRect(fillRectData)
-
-            return storage
-        }
-    }
-
-    inner class Battle : Mode() {
-
-        // 敵を表示する矩形の描画データ
-        private val enemyWindow = StrokeRectData(
-            DrawAreaData(
-                DrawParam.ScreenW * 0.1F,
-                DrawParam.ScreenH * 0.1F,
-                DrawParam.ScreenW * 0.8F,
-                ENEMY_WINDOW_HEIGHT
-            ),
-            Color.WHITE,
-            10F
-        )
-
-        // 敵ウィンドウの背景(空)
-        private val enemySky = FillRectData(
-            DrawAreaData(
-                DrawParam.ScreenW * 0.1F,
-                DrawParam.ScreenH * 0.1F,
-                DrawParam.ScreenW * 0.8F,
-                ENEMY_WINDOW_HEIGHT * 0.3F
-            ),
-            Color.BLUE
-        )
-
-        //敵ウィンドウの背景(地上)
-        private val enemyField = FillRectData(
-            DrawAreaData(
-                DrawParam.ScreenW * 0.1F,
-                DrawParam.ScreenH * 0.1F + ENEMY_WINDOW_HEIGHT * 0.3F,
-                DrawParam.ScreenW * 0.8F,
-                ENEMY_WINDOW_HEIGHT * 0.7F
-            ),
-            Color.GREEN
-        )
-
-        //選択ウィンドウ
-        private val selectWindow = StrokeRectData(
-            DrawAreaData(
-                DrawParam.ScreenW * 0.05F,
-                DrawParam.ScreenH * 0.6F,
-                DrawParam.ScreenW * 0.9F,
-                SELECT_WINDOW_HEIGHT
-            ),
-            Color.WHITE,
-            10F
-        )
-
-        override fun update(motionEvent: GameMotionEvent): Mode {
-            return this
-        }
-
-        override fun createStorage(): DrawingDataStorage {
-            // ゲーム画面の四角形を含めた全ての四角形を返す
-            val storage = DrawingDataStorage(Color.BLACK)
-            storage.addRect(enemySky)
-            storage.addRect(enemyField)
-            storage.addRect(enemyWindow)
-            storage.addRect(selectWindow)
-            storage.addRect(wordData.enemy.getRectData(DrawParam.ScreenW / 2F, DrawParam.ScreenH * 0.1F + ENEMY_WINDOW_HEIGHT * 0.7F))
-
-            return storage
+        return DrawingDataStorage(Color.GREEN).apply {
+            addRect(worldData.player.getRectData())
+            addRect(worldData.enemy.getRectData(enemyViewCenterX, enemyViewCenterY))
         }
     }
 }

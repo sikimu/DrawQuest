@@ -3,7 +3,7 @@ package com.sikimu.drawquest
 /**
  * 世界全体の情報
  */
-class WordData() {
+class WorldData() {
     var cameraCenter = Vector2D(0F, 0F)
 
     var player = RectPlayer()
