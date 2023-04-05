@@ -19,17 +19,14 @@ class GameMain(motionEvent: GameMotionEvent) : Game() {
         const val SELECT_WINDOW_HEIGHT = 400F
     }
 
-    /** カメラ中央位置 */
-    private var cameraCenter = Vector2D(0F, 0F)
-
-    private val player = RectPlayer()
-    private var playerCenter = Vector2D(200F, 200F)
-    private val enemy = RectEnemy()
-    private var enemyCenter = Vector2D(200F, 400F)
+    /**
+     * 世界全体の情報
+     */
+    private val wordData = WordData()
 
     // 敵の表示位置
-    private var enemyViewCenterX = (DrawParam.ScreenW * 0.5F) + (enemyCenter.x - cameraCenter.x)
-    private var enemyViewCenterY = (DrawParam.ScreenH * 0.5F) + (enemyCenter.y - cameraCenter.y)
+    private var enemyViewCenterX = (DrawParam.ScreenW * 0.5F) + (wordData.enemyCenter.x - wordData.cameraCenter.x)
+    private var enemyViewCenterY = (DrawParam.ScreenH * 0.5F) + (wordData.enemyCenter.y - wordData.cameraCenter.y)
 
     private var mode : Mode = Field()
 
@@ -70,20 +67,20 @@ class GameMain(motionEvent: GameMotionEvent) : Game() {
 
             var nextMode : Mode = this
 
-            player.update(motionEvent)
+            wordData.player.update(motionEvent)
 
-            playerCenter += player.getDelta()
-            cameraCenter = playerCenter
+            wordData.playerCenter += wordData.player.getDelta()
+            wordData.cameraCenter = wordData.playerCenter
 
             // プレイヤーと敵が近すぎる場合、プレイヤーの位置を調整する
-            if ((playerCenter - enemyCenter).magnitude() < (RectPlayer.WIDTH / 2 + RectEnemy.WIDTH / 2)) {
-                playerCenter += ((playerCenter - enemyCenter).normalize() * (RectPlayer.WIDTH / 2 + RectEnemy.WIDTH / 2) - (playerCenter - enemyCenter))
+            if ((wordData.playerCenter - wordData.enemyCenter).magnitude() < (RectPlayer.WIDTH / 2 + RectEnemy.WIDTH / 2)) {
+                wordData.playerCenter += ((wordData.playerCenter - wordData.enemyCenter).normalize() * (RectPlayer.WIDTH / 2 + RectEnemy.WIDTH / 2) - (wordData.playerCenter - wordData.enemyCenter))
                 nextMode = BattleIn()
             }
 
 
-            enemyViewCenterX = (DrawParam.ScreenW * 0.5F) + (enemyCenter.x - cameraCenter.x)
-            enemyViewCenterY = (DrawParam.ScreenH * 0.5F) + (enemyCenter.y - cameraCenter.y)
+            enemyViewCenterX = (DrawParam.ScreenW * 0.5F) + (wordData.enemyCenter.x - wordData.cameraCenter.x)
+            enemyViewCenterY = (DrawParam.ScreenH * 0.5F) + (wordData.enemyCenter.y - wordData.cameraCenter.y)
 
             return nextMode
         }
@@ -95,8 +92,8 @@ class GameMain(motionEvent: GameMotionEvent) : Game() {
          */
         override fun createStorage(): DrawingDataStorage {
             return DrawingDataStorage(Color.GREEN).apply {
-                addRect(player.getRectData())
-                addRect(enemy.getRectData(enemyViewCenterX, enemyViewCenterY))
+                addRect(wordData.player.getRectData())
+                addRect(wordData.enemy.getRectData(enemyViewCenterX, enemyViewCenterY))
             }
         }
     }
@@ -117,15 +114,15 @@ class GameMain(motionEvent: GameMotionEvent) : Game() {
 
         override fun createStorage(): DrawingDataStorage {
             val storage = DrawingDataStorage(Color.GREEN)
-            storage.addRect(player.getRectData())
-            storage.addRect(enemy.getRectData(enemyViewCenterX, enemyViewCenterY))
+            storage.addRect(wordData.player.getRectData())
+            storage.addRect(wordData.enemy.getRectData(enemyViewCenterX, enemyViewCenterY))
             storage.addRect(fillRectData)
 
             return storage
         }
     }
 
-    inner class Battle() : Mode() {
+    inner class Battle : Mode() {
 
         // 敵を表示する矩形の描画データ
         private val enemyWindow = StrokeRectData(
@@ -184,7 +181,7 @@ class GameMain(motionEvent: GameMotionEvent) : Game() {
             storage.addRect(enemyField)
             storage.addRect(enemyWindow)
             storage.addRect(selectWindow)
-            storage.addRect(enemy.getRectData(DrawParam.ScreenW / 2F, DrawParam.ScreenH * 0.1F + ENEMY_WINDOW_HEIGHT * 0.7F))
+            storage.addRect(wordData.enemy.getRectData(DrawParam.ScreenW / 2F, DrawParam.ScreenH * 0.1F + ENEMY_WINDOW_HEIGHT * 0.7F))
 
             return storage
         }
