@@ -3,8 +3,9 @@ package com.sikimu.drawquest
 import android.graphics.Color
 import com.sikimu.drawquest.drawdata.DrawAreaData
 import com.sikimu.drawquest.drawdata.FillRectData
-import org.junit.Assert.*
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNotEquals
+import org.junit.jupiter.api.Test
 
 class FillRectDataTest {
 
@@ -12,7 +13,7 @@ class FillRectDataTest {
     fun `should compare equal when all properties are the same`() {
         // Given
         val fillRectData1 = FillRectData(DrawAreaData(100.0F, 200.0F, 50.0F, 80.0F), Color.RED)
-        val fillRectData2 = FillRectData(DrawAreaData(100.0F, 200.0F, 50.0F, 80.0F), Color.RED)
+        val fillRectData2 = FillRectData(DrawAreaData(100.0F, 200.0F, 50.0F, 80.0F) , Color.RED)
 
         // Then
         assertEquals(fillRectData1, fillRectData2)

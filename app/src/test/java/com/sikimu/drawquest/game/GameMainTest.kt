@@ -3,9 +3,9 @@ package com.sikimu.drawquest.game
 import com.sikimu.drawquest.GameMotionEvent
 import com.sikimu.drawquest.Vector2D
 import com.sikimu.drawquest.WorldData
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNotNull
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Test
 
 class GameMainTest {
 

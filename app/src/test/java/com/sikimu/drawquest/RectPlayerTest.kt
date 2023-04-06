@@ -1,8 +1,8 @@
 package com.sikimu.drawquest
 
-import android.graphics.Color
-import org.junit.Test
-import org.junit.Assert.*
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Test
+
 
 class RectPlayerTest {
 

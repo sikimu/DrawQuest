@@ -6,9 +6,9 @@ import com.sikimu.drawquest.drawdata.DrawAreaData
 import com.sikimu.drawquest.drawdata.FillRectData
 import com.sikimu.drawquest.game.GameMain
 import com.sikimu.drawquest.game.GameTitle
-import junit.framework.TestCase.assertTrue
-import org.junit.Assert.assertEquals
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Test
 
 class GameTitleTest {
 
