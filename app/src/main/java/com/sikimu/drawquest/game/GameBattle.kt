@@ -9,7 +9,7 @@ import com.sikimu.drawquest.drawdata.DrawParam
 import com.sikimu.drawquest.drawdata.FillRectData
 import com.sikimu.drawquest.drawdata.StrokeRectData
 
-class GameBattle : Game() {
+class GameBattle(val worldData: WorldData) : Game() {
     // 敵を表示する矩形の描画データ
     private val enemyWindow = StrokeRectData(
         DrawAreaData(
@@ -56,11 +56,11 @@ class GameBattle : Game() {
         10F
     )
 
-    override fun update(worldData : WorldData , motionEvent: GameMotionEvent): Game {
+    override fun update(motionEvent: GameMotionEvent): Game {
         return this
     }
 
-    override fun createStorage(worldData : WorldData): DrawingDataStorage {
+    override fun createStorage(): DrawingDataStorage {
         // ゲーム画面の四角形を含めた全ての四角形を返す
         val storage = DrawingDataStorage(Color.BLACK)
         storage.addRect(enemySky)

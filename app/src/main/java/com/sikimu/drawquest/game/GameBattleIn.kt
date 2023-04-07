@@ -8,7 +8,7 @@ import com.sikimu.drawquest.drawdata.DrawAreaData
 import com.sikimu.drawquest.drawdata.DrawParam
 import com.sikimu.drawquest.drawdata.FillRectData
 
-class GameBattleIn(worldData : WorldData): Game() {
+class GameBattleIn(val worldData : WorldData): Game() {
 
     private var darkness = 0 // 矩形の暗さ (0: 透明, 255: 黒)
     private var fillRectData : FillRectData = FillRectData(DrawAreaData(0F, 0F, 0F, 0F) , Color.argb(darkness,0,0,0))
@@ -16,18 +16,18 @@ class GameBattleIn(worldData : WorldData): Game() {
     private var enemyViewCenterX = (DrawParam.ScreenW * 0.5F) + (worldData.enemyCenter.x - worldData.cameraCenter.x)
     private var enemyViewCenterY = (DrawParam.ScreenH * 0.5F) + (worldData.enemyCenter.y - worldData.cameraCenter.y)
 
-    override fun update(worldData : WorldData , motionEvent: GameMotionEvent) : Game {
+    override fun update(motionEvent: GameMotionEvent) : Game {
         darkness += 8 // 暗くする速度はここで調整する
         fillRectData = FillRectData(DrawAreaData(0F, 0F, DrawParam.ScreenW, DrawParam.ScreenH) , Color.argb(darkness % 256, 0, 0, 0))
 
         if (darkness >= 256 * 3) {
             // 暗さが255になったら次のモードに移行する
-            return GameBattle()
+            return GameBattle(worldData)
         }
         return this
     }
 
-    override fun createStorage(worldData : WorldData): DrawingDataStorage {
+    override fun createStorage(): DrawingDataStorage {
         val storage = DrawingDataStorage(Color.GREEN)
         storage.addRect(worldData.player.getRectData())
         storage.addRect(worldData.enemy.getRectData(enemyViewCenterX, enemyViewCenterY))

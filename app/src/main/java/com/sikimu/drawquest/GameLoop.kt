@@ -9,7 +9,6 @@ class GameLoop(private val system: GameHandler) : Runnable {
     private var isRunning = false
     private var lastUpdateTime = System.currentTimeMillis()
     private var game: Game = GameTitle()
-    private var worldData = WorldData()
 
     override fun run() {
         if (isRunning) {
@@ -19,8 +18,8 @@ class GameLoop(private val system: GameHandler) : Runnable {
 
             // ゲームの状態を更新する処理を実装する
             // 経過時間をelapsedTimeで考慮して、1回分の更新を行う
-            game = game.update(worldData, motionEvent)
-            val rectStorage = game.createStorage(worldData)
+            game = game.update(motionEvent)
+            val rectStorage = game.createStorage()
             system.draw(rectStorage)
 
             //Downを解除する

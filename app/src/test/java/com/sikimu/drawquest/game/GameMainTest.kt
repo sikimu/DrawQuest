@@ -16,7 +16,7 @@ class GameMainTest {
         val gameMain = GameMain(worldData, GameMotionEvent(Vector2D(150f, 550f) , GameMotionEvent.Action.DOWN))
 
         // createStorage()で返されるDrawingDataStorageに含まれるRectDataの数を確認
-        val result = gameMain.createStorage(worldData)
+        val result = gameMain.createStorage()
         assertNotNull(result.getStorage())
         assertEquals(2, result.getStorage().size)
     }

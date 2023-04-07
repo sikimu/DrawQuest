@@ -9,16 +9,16 @@ class GameTitle : Game(){
 
     private val button = HitData(100F, 500F, 600F, 600F)
 
-    override fun update(worldData: WorldData , motionEvent: GameMotionEvent): Game {
+    override fun update(motionEvent: GameMotionEvent): Game {
         if(motionEvent.action == GameMotionEvent.Action.UP) {
             if(button.contains(motionEvent)) {
-                return GameMain(worldData , motionEvent)
+                return GameMain(WorldData(), motionEvent)
             }
         }
         return this
     }
 
-    override fun createStorage(worldData: WorldData): DrawingDataStorage {
+    override fun createStorage(): DrawingDataStorage {
         return DrawingDataStorage(Color.YELLOW).apply {
             addRect(FillRectData(DrawAreaData(button.left, button.top, button.right - button.left, button.bottom - button.top) , Color.WHITE))
         }

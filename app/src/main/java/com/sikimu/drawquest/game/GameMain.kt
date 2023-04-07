@@ -9,7 +9,7 @@ import com.sikimu.drawquest.drawdata.DrawParam
  *
  * @param motionEvent ゲームの入力
  */
-class GameMain(worldData : WorldData , motionEvent: GameMotionEvent) : Game() {
+class GameMain(private val worldData : WorldData , motionEvent: GameMotionEvent) : Game() {
 
     companion object{
         const val ENEMY_WINDOW_HEIGHT = 800F
@@ -21,7 +21,7 @@ class GameMain(worldData : WorldData , motionEvent: GameMotionEvent) : Game() {
     private var enemyViewCenterY = (DrawParam.ScreenH * 0.5F) + (worldData.enemyCenter.y - worldData.cameraCenter.y)
 
     init {
-        update(worldData, motionEvent)
+        update(motionEvent)
     }
 
     /**
@@ -30,7 +30,7 @@ class GameMain(worldData : WorldData , motionEvent: GameMotionEvent) : Game() {
      * @param motionEvent ゲームの入力
      * @return ゲームの状態
      */
-    override fun update(worldData : WorldData , motionEvent: GameMotionEvent): Game {
+    override fun update(motionEvent: GameMotionEvent): Game {
 
         worldData.player.update(motionEvent)
 
@@ -55,7 +55,7 @@ class GameMain(worldData : WorldData , motionEvent: GameMotionEvent) : Game() {
      *
      * @return 描画データ
      */
-    override fun createStorage(worldData : WorldData): DrawingDataStorage {
+    override fun createStorage(): DrawingDataStorage {
 
         return DrawingDataStorage(Color.GREEN).apply {
             addRect(worldData.player.getRectData())
