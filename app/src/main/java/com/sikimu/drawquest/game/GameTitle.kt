@@ -7,7 +7,8 @@ import com.sikimu.drawquest.drawdata.FillRectData
 
 class GameTitle : Game(){
 
-    private val button = HitData(100F, 500F, 600F, 600F)
+    private val button =
+        HitData(100F, 500F, 500F, 100F)
 
     override fun update(motionEvent: GameMotionEvent): Game {
         if(motionEvent.action == GameMotionEvent.Action.UP) {
@@ -20,7 +21,7 @@ class GameTitle : Game(){
 
     override fun createStorage(): DrawingDataStorage {
         return DrawingDataStorage(Color.YELLOW).apply {
-            addRect(FillRectData(DrawAreaData(button.left, button.top, button.right - button.left, button.bottom - button.top) , Color.WHITE))
+            addRect(FillRectData(DrawAreaData(button.x, button.y, button.width, button.height) , Color.WHITE))
         }
     }
 }
