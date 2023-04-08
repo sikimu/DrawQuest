@@ -7,9 +7,8 @@ import com.sikimu.drawquest.drawdata.DrawParam
 /**
  * ゲームのメインクラス
  *
- * @param motionEvent ゲームの入力
  */
-class GameMain(private val worldData : WorldData , motionEvent: GameMotionEvent) : Game() {
+class GameMain(private val worldData : WorldData) : Game() {
 
     companion object{
         const val ENEMY_WINDOW_HEIGHT = 800F
@@ -21,7 +20,9 @@ class GameMain(private val worldData : WorldData , motionEvent: GameMotionEvent)
     private var enemyViewCenterY = (DrawParam.ScreenH * 0.5F) + (worldData.enemyCenter.y - worldData.cameraCenter.y)
 
     init {
-        update(motionEvent)
+        // 敵の表示位置を更新する
+        enemyViewCenterX = (DrawParam.ScreenW * 0.5F) + (worldData.enemyCenter.x - worldData.cameraCenter.x)
+        enemyViewCenterY = (DrawParam.ScreenH * 0.5F) + (worldData.enemyCenter.y - worldData.cameraCenter.y)
     }
 
     /**

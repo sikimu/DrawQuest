@@ -12,7 +12,7 @@ class GameTitle : Game(){
     override fun update(motionEvent: GameMotionEvent): Game {
         if(motionEvent.action == GameMotionEvent.Action.UP) {
             if(button.contains(motionEvent)) {
-                return GameMain(WorldData(), motionEvent)
+                return GameMain(WorldData())
             }
         }
         return this
