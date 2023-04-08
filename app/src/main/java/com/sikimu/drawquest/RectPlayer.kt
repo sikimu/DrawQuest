@@ -1,14 +1,10 @@
 package com.sikimu.drawquest
 
-import android.graphics.Color
-import com.sikimu.drawquest.drawdata.DrawAreaData
-import com.sikimu.drawquest.drawdata.DrawParam
-import com.sikimu.drawquest.drawdata.FillCenterRectData
-
 class RectPlayer {
     companion object {
         const val WIDTH = 100F
         const val HEIGHT = 100F
+
         const val VELOCITY = 20f // 速度
         const val MINIMUM_MOVE_DISTANCE = 100 // 最小移動距離
     }
@@ -39,16 +35,6 @@ class RectPlayer {
                 delta = Vector2D(0f, 0f)
             }
         }
-    }
-
-    fun getRectData(): FillCenterRectData {
-        return FillCenterRectData(
-            DrawAreaData(
-                DrawParam.ScreenW * 0.5F,
-                DrawParam.ScreenH * 0.5F,
-                WIDTH , HEIGHT
-            ),
-            Color.BLUE)
     }
 
     fun getDelta(): Vector2D {

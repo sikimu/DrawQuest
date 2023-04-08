@@ -8,8 +8,9 @@ import com.sikimu.drawquest.drawer.RectEnemyDrawer
 import com.sikimu.drawquest.drawdata.DrawAreaData
 import com.sikimu.drawquest.drawdata.DrawParam
 import com.sikimu.drawquest.drawdata.FillRectData
+import com.sikimu.drawquest.drawer.RectPlayerDrawer
 
-class GameBattleIn(val worldData : WorldData): Game() {
+class GameBattleIn(worldData : WorldData): Game() {
 
     private var darkness = 0 // 矩形の暗さ (0: 透明, 255: 黒)
     private var fillRectData : FillRectData = FillRectData(DrawAreaData(0F, 0F, 0F, 0F) , Color.argb(darkness,0,0,0))
@@ -30,7 +31,7 @@ class GameBattleIn(val worldData : WorldData): Game() {
 
     override fun createStorage(): DrawingDataStorage {
         val storage = DrawingDataStorage(Color.GREEN)
-        storage.addRect(worldData.player.getRectData())
+        storage.addRect(RectPlayerDrawer.create())
         storage.addRect(RectEnemyDrawer.create(enemyViewCenterX, enemyViewCenterY))
         storage.addRect(fillRectData)
 

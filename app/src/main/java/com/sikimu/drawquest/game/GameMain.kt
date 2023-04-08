@@ -4,6 +4,7 @@ import android.graphics.Color
 import com.sikimu.drawquest.*
 import com.sikimu.drawquest.drawer.RectEnemyDrawer
 import com.sikimu.drawquest.drawdata.DrawParam
+import com.sikimu.drawquest.drawer.RectPlayerDrawer
 
 /**
  * ゲームのメインクラス
@@ -54,7 +55,7 @@ class GameMain(private val worldData : WorldData) : Game() {
     override fun createStorage(): DrawingDataStorage {
 
         return DrawingDataStorage(Color.GREEN).apply {
-            addRect(worldData.player.getRectData())
+            addRect(RectPlayerDrawer.create())
             addRect(RectEnemyDrawer.create(enemyViewCenterX, enemyViewCenterY))
         }
     }
