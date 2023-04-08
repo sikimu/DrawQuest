@@ -2,6 +2,7 @@ package com.sikimu.drawquest.game
 
 import android.graphics.Color
 import com.sikimu.drawquest.*
+import com.sikimu.drawquest.drawer.RectEnemyDrawer
 import com.sikimu.drawquest.drawdata.DrawParam
 
 /**
@@ -33,8 +34,8 @@ class GameMain(private val worldData : WorldData) : Game() {
         worldData.cameraCenter = worldData.playerCenter
 
         // プレイヤーと敵が近すぎる場合、プレイヤーの位置を調整する
-        if ((worldData.playerCenter - worldData.enemyCenter).magnitude() < (RectPlayer.WIDTH / 2 + RectEnemy.WIDTH / 2)) {
-            worldData.playerCenter += ((worldData.playerCenter - worldData.enemyCenter).normalize() * (RectPlayer.WIDTH / 2 + RectEnemy.WIDTH / 2) - (worldData.playerCenter - worldData.enemyCenter))
+        if ((worldData.playerCenter - worldData.enemyCenter).magnitude() < (RectPlayer.WIDTH / 2 + RectEnemyDrawer.WIDTH / 2)) {
+            worldData.playerCenter += ((worldData.playerCenter - worldData.enemyCenter).normalize() * (RectPlayer.WIDTH / 2 + RectEnemyDrawer.WIDTH / 2) - (worldData.playerCenter - worldData.enemyCenter))
             return GameBattleIn(worldData)
         }
 
@@ -54,7 +55,7 @@ class GameMain(private val worldData : WorldData) : Game() {
 
         return DrawingDataStorage(Color.GREEN).apply {
             addRect(worldData.player.getRectData())
-            addRect(worldData.enemy.getRectData(enemyViewCenterX, enemyViewCenterY))
+            addRect(RectEnemyDrawer.create(enemyViewCenterX, enemyViewCenterY))
         }
     }
 }

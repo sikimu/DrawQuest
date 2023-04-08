@@ -8,6 +8,5 @@ class WorldData() {
 
     var player = RectPlayer()
     var playerCenter = Vector2D(200F, 200F)
-    var enemy = RectEnemy()
     var enemyCenter = Vector2D(200F, 400F)
 }

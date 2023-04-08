@@ -4,6 +4,7 @@ import android.graphics.Color
 import com.sikimu.drawquest.DrawingDataStorage
 import com.sikimu.drawquest.GameMotionEvent
 import com.sikimu.drawquest.WorldData
+import com.sikimu.drawquest.drawer.RectEnemyDrawer
 import com.sikimu.drawquest.drawdata.DrawAreaData
 import com.sikimu.drawquest.drawdata.DrawParam
 import com.sikimu.drawquest.drawdata.FillRectData
@@ -22,7 +23,7 @@ class GameBattleIn(val worldData : WorldData): Game() {
 
         if (darkness >= 256 * 3) {
             // 暗さが255になったら次のモードに移行する
-            return GameBattle(worldData)
+            return GameBattle()
         }
         return this
     }
@@ -30,7 +31,7 @@ class GameBattleIn(val worldData : WorldData): Game() {
     override fun createStorage(): DrawingDataStorage {
         val storage = DrawingDataStorage(Color.GREEN)
         storage.addRect(worldData.player.getRectData())
-        storage.addRect(worldData.enemy.getRectData(enemyViewCenterX, enemyViewCenterY))
+        storage.addRect(RectEnemyDrawer.create(enemyViewCenterX, enemyViewCenterY))
         storage.addRect(fillRectData)
 
         return storage

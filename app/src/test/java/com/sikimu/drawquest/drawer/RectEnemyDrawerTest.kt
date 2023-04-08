@@ -1,16 +1,15 @@
-package com.sikimu.drawquest
+package com.sikimu.drawquest.drawer
 
 import android.graphics.Color
 import com.sikimu.drawquest.drawdata.DrawParam
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-class RectEnemyTest {
+class RectEnemyDrawerTest {
 
     @Test
     fun testGetRectData() {
-        val enemy = RectEnemy()
-        val rectData = enemy.getRectData(DrawParam.Pixel(50F), DrawParam.Pixel(100F))
+        val rectData = RectEnemyDrawer.create(DrawParam.Pixel(50F), DrawParam.Pixel(100F))
         assertEquals(DrawParam.Pixel(50F), rectData.drawAreaData.x)
         assertEquals(DrawParam.Pixel(100F), rectData.drawAreaData.y)
         assertEquals(DrawParam.Pixel(100F), rectData.drawAreaData.width)

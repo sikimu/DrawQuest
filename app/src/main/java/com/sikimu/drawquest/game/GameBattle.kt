@@ -3,13 +3,13 @@ package com.sikimu.drawquest.game
 import android.graphics.Color
 import com.sikimu.drawquest.DrawingDataStorage
 import com.sikimu.drawquest.GameMotionEvent
-import com.sikimu.drawquest.WorldData
 import com.sikimu.drawquest.drawdata.DrawAreaData
 import com.sikimu.drawquest.drawdata.DrawParam
 import com.sikimu.drawquest.drawdata.FillRectData
 import com.sikimu.drawquest.drawdata.StrokeRectData
+import com.sikimu.drawquest.drawer.RectEnemyDrawer
 
-class GameBattle(private val worldData: WorldData) : Game() {
+class GameBattle() : Game() {
     // 敵を表示する矩形の描画データ
     private val enemyWindow = StrokeRectData(
         DrawAreaData(
@@ -67,7 +67,7 @@ class GameBattle(private val worldData: WorldData) : Game() {
         storage.addRect(enemyField)
         storage.addRect(enemyWindow)
         storage.addRect(selectWindow)
-        storage.addRect(worldData.enemy.getRectData(DrawParam.ScreenW / 2F, DrawParam.ScreenH * 0.1F + GameMain.ENEMY_WINDOW_HEIGHT * 0.7F))
+        storage.addRect(RectEnemyDrawer.create(DrawParam.ScreenW / 2F, DrawParam.ScreenH * 0.1F + GameMain.ENEMY_WINDOW_HEIGHT * 0.7F))
 
         return storage
     }
