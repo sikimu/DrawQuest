@@ -9,7 +9,7 @@ import com.sikimu.drawquest.drawdata.DrawParam
 import com.sikimu.drawquest.drawdata.FillRectData
 import com.sikimu.drawquest.drawdata.StrokeRectData
 
-class GameBattle(val worldData: WorldData) : Game() {
+class GameBattle(private val worldData: WorldData) : Game() {
     // 敵を表示する矩形の描画データ
     private val enemyWindow = StrokeRectData(
         DrawAreaData(
