@@ -23,6 +23,9 @@ class MainView(context: Context?, attrs: AttributeSet?) : View(context, attrs) {
 
         canvas.save() // 描画状態を保存
 
+        // 画面の中心に原点を移動
+        canvas.translate((width / 2).toFloat(), (height / 2).toFloat())
+
         synchronized(this) {
             drawingDataStorage?.getStorage()?.forEach {
                 it.draw(canvas, paint)
