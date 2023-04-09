@@ -10,7 +10,7 @@ class HitDataTest {
     @Test
     @DisplayName("HitDataのcontainsメソッドのテスト: HitData内にある点を引数に渡すとtrueを返す")
     fun testContains_returnsTrue_whenPointInsideHitData() {
-        val hitData = HitData(100f, 100f, 200f, 200f)
+        val hitData = HitData(200f, 200f, 200f, 200f)
         // HitData内に含まれる点のテスト
         assertTrue(hitData.contains(GameMotionEvent(Vector2D(100f, 100f), GameMotionEvent.Action.DOWN)))
         assertTrue(hitData.contains(GameMotionEvent(Vector2D(100f, 300f), GameMotionEvent.Action.DOWN)))
@@ -21,7 +21,7 @@ class HitDataTest {
     @Test
     @DisplayName("HitDataのcontainsメソッドのテスト: HitData外にある点を引数に渡すとfalseを返す")
     fun testContains_returnsFalse_whenPointOutsideHitData() {
-        val hitData = HitData(100f, 100f, 200f, 200f)
+        val hitData = HitData(200f, 200f, 200f, 200f)
         // HitData外にある点のテスト
         assertFalse(hitData.contains(GameMotionEvent(Vector2D(99.9f, 99.9f), GameMotionEvent.Action.DOWN))) // 左上
         assertFalse(hitData.contains(GameMotionEvent(Vector2D(100.1f, 99.9f), GameMotionEvent.Action.DOWN))) // 上端

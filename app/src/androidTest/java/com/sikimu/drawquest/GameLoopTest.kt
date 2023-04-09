@@ -32,13 +32,13 @@ class GameLoopTest {
         val motionEvent = builder.build()
 
         // execute
-        val result = gameLoop.onTouchEvent(motionEvent)
+        val result = gameLoop.onTouchEvent(motionEvent, 100, 100)
 
         // verify
         assertEquals(false, result)
         assertEquals(GameMotionEvent.Action.DOWN , gameLoop.motionEvent.action)
-        assertEquals(100F, gameLoop.motionEvent.vector2D.x)
-        assertEquals(100F, gameLoop.motionEvent.vector2D.y)
+        assertEquals(50F, gameLoop.motionEvent.vector2D.x)
+        assertEquals(50F, gameLoop.motionEvent.vector2D.y)
 
         // cleanup
         motionEvent.recycle()
@@ -54,13 +54,13 @@ class GameLoopTest {
         val motionEvent = builder.build()
 
         // execute
-        val result = gameLoop.onTouchEvent(motionEvent)
+        val result = gameLoop.onTouchEvent(motionEvent, 100, 100)
 
         // verify
         assertEquals(false, result)
         assertEquals(GameMotionEvent.Action.UP , gameLoop.motionEvent.action)
-        assertEquals(150F, gameLoop.motionEvent.vector2D.x)
-        assertEquals(150F, gameLoop.motionEvent.vector2D.y)
+        assertEquals(100F, gameLoop.motionEvent.vector2D.x)
+        assertEquals(100F, gameLoop.motionEvent.vector2D.y)
 
         // cleanup
         motionEvent.recycle()
@@ -76,13 +76,13 @@ class GameLoopTest {
         val motionEvent = builder.build()
 
         // execute
-        val result = gameLoop.onTouchEvent(motionEvent)
+        val result = gameLoop.onTouchEvent(motionEvent, 100, 100)
 
         // verify
         assertEquals(false, result)
         assertEquals(GameMotionEvent.Action.PRESS , gameLoop.motionEvent.action)
-        assertEquals(200F, gameLoop.motionEvent.vector2D.x)
-        assertEquals(200F, gameLoop.motionEvent.vector2D.y)
+        assertEquals(150F, gameLoop.motionEvent.vector2D.x)
+        assertEquals(150F, gameLoop.motionEvent.vector2D.y)
 
         // cleanup
         motionEvent.recycle()
@@ -98,19 +98,19 @@ class GameLoopTest {
         val motionEvent = builder.build()
 
         // execute
-        val result = gameLoop.onTouchEvent(motionEvent)
+        val result = gameLoop.onTouchEvent(motionEvent, 100, 100)
 
         // verify
         assertEquals(false, result)
         assertEquals(GameMotionEvent.Action.DOWN , gameLoop.motionEvent.action)
-        assertEquals(100F, gameLoop.motionEvent.vector2D.x)
-        assertEquals(100F, gameLoop.motionEvent.vector2D.y)
+        assertEquals(50F, gameLoop.motionEvent.vector2D.x)
+        assertEquals(50F, gameLoop.motionEvent.vector2D.y)
 
         builder.setPointer(110F,110F)
         builder.setAction(MotionEvent.ACTION_MOVE)
         assertEquals(GameMotionEvent.Action.DOWN , gameLoop.motionEvent.action)
-        assertEquals(100F, gameLoop.motionEvent.vector2D.x)
-        assertEquals(100F, gameLoop.motionEvent.vector2D.y)
+        assertEquals(50F, gameLoop.motionEvent.vector2D.x)
+        assertEquals(50F, gameLoop.motionEvent.vector2D.y)
 
         // cleanup
         motionEvent.recycle()

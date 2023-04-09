@@ -1,14 +1,17 @@
 package com.sikimu.drawquest.game
 
 import android.graphics.Color
-import com.sikimu.drawquest.*
+import com.sikimu.drawquest.DrawingDataStorage
+import com.sikimu.drawquest.GameMotionEvent
+import com.sikimu.drawquest.HitData
+import com.sikimu.drawquest.WorldData
 import com.sikimu.drawquest.drawdata.DrawAreaData
-import com.sikimu.drawquest.drawdata.FillRectData
+import com.sikimu.drawquest.drawdata.FillCenterRectData
 
 class GameTitle : Game(){
 
     private val button =
-        HitData(100F, 500F, 500F, 100F)
+        HitData(0F, 500F, 500F, 100F)
 
     override fun update(motionEvent: GameMotionEvent): Game {
         if(motionEvent.action == GameMotionEvent.Action.UP) {
@@ -21,7 +24,7 @@ class GameTitle : Game(){
 
     override fun createStorage(): DrawingDataStorage {
         return DrawingDataStorage(Color.YELLOW).apply {
-            addRect(FillRectData(DrawAreaData(button.x, button.y, button.width, button.height) , Color.WHITE))
+            addRect(FillCenterRectData(DrawAreaData(button.centerX, button.centerY, button.width, button.height) , Color.WHITE))
         }
     }
 }
