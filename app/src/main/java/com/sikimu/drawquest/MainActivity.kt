@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
-        if (!gameLoop.onTouchEvent(event)) {
+        if (!gameLoop.onTouchEvent(event, mainView.width, mainView.height)) {
             return super.onTouchEvent(event)
         }
         return true
