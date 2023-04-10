@@ -3,20 +3,18 @@ package com.sikimu.drawquest.game
 import android.graphics.Color
 import com.sikimu.drawquest.DrawingDataStorage
 import com.sikimu.drawquest.GameMotionEvent
-import com.sikimu.drawquest.drawdata.DrawAreaData
-import com.sikimu.drawquest.drawdata.DrawParam
-import com.sikimu.drawquest.drawdata.FillRectData
-import com.sikimu.drawquest.drawdata.StrokeRectData
+import com.sikimu.drawquest.drawdata.*
 import com.sikimu.drawquest.drawer.RectEnemyDrawer
 
-class GameBattle() : Game() {
+class GameBattle : Game() {
+
     // 敵を表示する矩形の描画データ
     private val enemyWindow = StrokeRectData(
         DrawAreaData(
-            DrawParam.ScreenW * 0.1F,
-            DrawParam.ScreenH * 0.1F,
-            DrawParam.ScreenW * 0.8F,
-            GameMain.ENEMY_WINDOW_HEIGHT
+            -400F,
+            -700F,
+            800F,
+            600F
         ) ,
         Color.WHITE,
         10F
@@ -25,10 +23,10 @@ class GameBattle() : Game() {
     // 敵ウィンドウの背景(空)
     private val enemySky = FillRectData(
         DrawAreaData(
-            DrawParam.ScreenW * 0.1F,
-            DrawParam.ScreenH * 0.1F,
-            DrawParam.ScreenW * 0.8F,
-            GameMain.ENEMY_WINDOW_HEIGHT * 0.3F
+            -400F,
+            -700F,
+            800F,
+            200F
         ) ,
         Color.BLUE
     )
@@ -36,10 +34,10 @@ class GameBattle() : Game() {
     //敵ウィンドウの背景(地上)
     private val enemyField = FillRectData(
         DrawAreaData(
-            DrawParam.ScreenW * 0.1F,
-            DrawParam.ScreenH * 0.1F + GameMain.ENEMY_WINDOW_HEIGHT * 0.3F,
-            DrawParam.ScreenW * 0.8F,
-            GameMain.ENEMY_WINDOW_HEIGHT * 0.7F
+            -400F,
+            -500F,
+            800F,
+            400F
         ) ,
         Color.GREEN
     )
@@ -47,10 +45,10 @@ class GameBattle() : Game() {
     //選択ウィンドウ
     private val selectWindow = StrokeRectData(
         DrawAreaData(
-            DrawParam.ScreenW * 0.05F,
-            DrawParam.ScreenH * 0.6F,
-            DrawParam.ScreenW * 0.9F,
-            GameMain.SELECT_WINDOW_HEIGHT
+            -500F,
+            400F,
+            1000F,
+            400F
         ) ,
         Color.WHITE,
         10F
@@ -67,8 +65,7 @@ class GameBattle() : Game() {
         storage.addRect(enemyField)
         storage.addRect(enemyWindow)
         storage.addRect(selectWindow)
-        storage.addRect(RectEnemyDrawer.create(DrawParam.ScreenW / 2F, DrawParam.ScreenH * 0.1F + GameMain.ENEMY_WINDOW_HEIGHT * 0.7F))
-
+        storage.addRect(RectEnemyDrawer.create(DrawParam.Pixel(0F), DrawParam.Pixel(-300F)))
         return storage
     }
 }

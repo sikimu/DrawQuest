@@ -12,11 +12,6 @@ import com.sikimu.drawquest.drawer.RectPlayerDrawer
  */
 class GameMain(private val worldData : WorldData) : Game() {
 
-    companion object{
-        const val ENEMY_WINDOW_HEIGHT = 800F
-        const val SELECT_WINDOW_HEIGHT = 400F
-    }
-
     // 敵の表示位置
     private var enemyViewCenterX = (DrawParam.ScreenW * 0.5F) + (worldData.enemyCenter.x - worldData.cameraCenter.x)
     private var enemyViewCenterY = (DrawParam.ScreenH * 0.5F) + (worldData.enemyCenter.y - worldData.cameraCenter.y)
@@ -41,8 +36,8 @@ class GameMain(private val worldData : WorldData) : Game() {
         }
 
         // 敵の表示位置を更新する
-        enemyViewCenterX = (DrawParam.ScreenW * 0.5F) + (worldData.enemyCenter.x - worldData.cameraCenter.x)
-        enemyViewCenterY = (DrawParam.ScreenH * 0.5F) + (worldData.enemyCenter.y - worldData.cameraCenter.y)
+        enemyViewCenterX = DrawParam.Pixel(worldData.enemyCenter.x - worldData.cameraCenter.x)
+        enemyViewCenterY = DrawParam.Pixel(worldData.enemyCenter.y - worldData.cameraCenter.y)
 
         return this
     }
