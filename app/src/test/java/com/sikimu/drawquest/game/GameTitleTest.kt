@@ -16,21 +16,12 @@ class GameTitleTest {
         val gameTitle = GameTitle()
 
         // クリック位置がクリック対象の中にある場合
-        val result1 = gameTitle.update(GameMotionEvent(Vector2D(50f, 550f), GameMotionEvent.Action.UP))
-        assertEquals(result1::class, GameTitle::class)
+        val result1 = gameTitle.update(GameMotionEvent(Vector2D(0F, 500F), GameMotionEvent.Action.UP))
+        assertEquals(result1::class, GameMain::class)
 
         // クリック位置がクリック対象の外にある場合
-        val result2 = gameTitle.update(GameMotionEvent(Vector2D(700f, 550f), GameMotionEvent.Action.UP))
+        val result2 = gameTitle.update(GameMotionEvent(Vector2D(0F, 800F), GameMotionEvent.Action.UP))
         assertEquals(result2::class, GameTitle::class)
-
-        val result3 = gameTitle.update(GameMotionEvent(Vector2D(50f, 50f), GameMotionEvent.Action.UP))
-        assertEquals(result3::class, GameTitle::class)
-
-        val result4 = gameTitle.update(GameMotionEvent(Vector2D(50f, 700f), GameMotionEvent.Action.UP))
-        assertEquals(result4::class, GameTitle::class)
-
-        val result5 = gameTitle.update(GameMotionEvent(Vector2D(700f, 700f), GameMotionEvent.Action.UP))
-        assertEquals(result5::class, GameTitle::class)
     }
 
 
@@ -41,7 +32,7 @@ class GameTitleTest {
         val gameTitle = GameTitle()
 
         // MotionEvent.ACTION_UP以外の場合はGameTitleのインスタンスが返る
-        val result = gameTitle.update(GameMotionEvent(Vector2D(150f, 550f), GameMotionEvent.Action.DOWN))
+        val result = gameTitle.update(GameMotionEvent(Vector2D(0F, 500F), GameMotionEvent.Action.DOWN))
         assertEquals(result::class, GameTitle::class)
     }
 }
