@@ -1,10 +1,10 @@
 package com.sikimu.drawquest
 
-class HitData(val centerX: Float, val centerY: Float, val width: Float, val height: Float) {
-    private val left = centerX - height / 2
-    private val right = centerX + height / 2
-    private val top = centerY - width / 2
-    private val bottom = centerY + width / 2
+class HitData(val x: Float, val y: Float, val width: Float, val height: Float) {
+    private val left = x
+    private val right = x + width
+    private val top = y
+    private val bottom = y + height
 
     fun contains(event : GameMotionEvent) : Boolean {
         return event.vector2D.x in left..right && event.vector2D.y in top..bottom
