@@ -1,10 +1,7 @@
 package com.sikimu.drawquest.game
 
 import android.graphics.Color
-import com.sikimu.drawquest.DrawingDataStorage
-import com.sikimu.drawquest.GameMotionEvent
-import com.sikimu.drawquest.HitData
-import com.sikimu.drawquest.WorldData
+import com.sikimu.drawquest.*
 import com.sikimu.drawquest.drawdata.DrawAreaData
 import com.sikimu.drawquest.drawdata.FillRectData
 
@@ -15,7 +12,7 @@ class GameTitle : Game(){
 
     override fun update(motionEvent: GameMotionEvent): Game {
         if(motionEvent.action == GameMotionEvent.Action.UP) {
-            if(button.contains(motionEvent)) {
+            if(Collision.contains(motionEvent.vector2D, button)) {
                 return GameMain(WorldData())
             }
         }
