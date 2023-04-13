@@ -8,7 +8,7 @@ import com.sikimu.drawquest.drawdata.FillRectData
 class GameTitle : Game(){
 
     private val button =
-        HitData(-250F, 450F, 500F, 100F)
+        Area(-250F, 450F, 500F, 100F)
 
     override fun update(motionEvent: GameMotionEvent): Game {
         if(motionEvent.action == GameMotionEvent.Action.UP) {
