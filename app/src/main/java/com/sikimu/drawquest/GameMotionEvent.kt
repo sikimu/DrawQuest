@@ -1,7 +1,7 @@
 package com.sikimu.drawquest
 
 data class GameMotionEvent(
-    var vector2D : Vector2D,
+    var point : Point,
     var action: Action
 ) {
     enum class Action {

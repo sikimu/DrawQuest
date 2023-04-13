@@ -9,18 +9,18 @@ class RectPlayer {
         const val MINIMUM_MOVE_DISTANCE = 100 // 最小移動距離
     }
 
-    private var start: Vector2D = Vector2D(0F, 0F)
+    private var start: Point = Point(0F, 0F)
     private var delta: Vector2D = Vector2D(0F, 0F)
 
     fun update(motionEvent: GameMotionEvent) {
         when (motionEvent.action) {
             GameMotionEvent.Action.DOWN -> {
                 // 開始点を記録
-                start = motionEvent.vector2D
+                start = motionEvent.point
             }
             GameMotionEvent.Action.PRESS -> {
                 // 開始点からの移動量を計算
-                val displacement = motionEvent.vector2D - start
+                val displacement = motionEvent.point - start
                 val distance = displacement.magnitude()
 
                 // 最小移動距離を超えた場合

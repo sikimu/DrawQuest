@@ -37,8 +37,8 @@ class GameLoopTest {
         // verify
         assertEquals(false, result)
         assertEquals(GameMotionEvent.Action.DOWN , gameLoop.motionEvent.action)
-        assertEquals(50F, gameLoop.motionEvent.vector2D.x)
-        assertEquals(50F, gameLoop.motionEvent.vector2D.y)
+        assertEquals(50F, gameLoop.motionEvent.point.x)
+        assertEquals(50F, gameLoop.motionEvent.point.y)
 
         // cleanup
         motionEvent.recycle()
@@ -59,8 +59,8 @@ class GameLoopTest {
         // verify
         assertEquals(false, result)
         assertEquals(GameMotionEvent.Action.UP , gameLoop.motionEvent.action)
-        assertEquals(100F, gameLoop.motionEvent.vector2D.x)
-        assertEquals(100F, gameLoop.motionEvent.vector2D.y)
+        assertEquals(100F, gameLoop.motionEvent.point.x)
+        assertEquals(100F, gameLoop.motionEvent.point.y)
 
         // cleanup
         motionEvent.recycle()
@@ -81,8 +81,8 @@ class GameLoopTest {
         // verify
         assertEquals(false, result)
         assertEquals(GameMotionEvent.Action.PRESS , gameLoop.motionEvent.action)
-        assertEquals(150F, gameLoop.motionEvent.vector2D.x)
-        assertEquals(150F, gameLoop.motionEvent.vector2D.y)
+        assertEquals(150F, gameLoop.motionEvent.point.x)
+        assertEquals(150F, gameLoop.motionEvent.point.y)
 
         // cleanup
         motionEvent.recycle()
@@ -103,14 +103,14 @@ class GameLoopTest {
         // verify
         assertEquals(false, result)
         assertEquals(GameMotionEvent.Action.DOWN , gameLoop.motionEvent.action)
-        assertEquals(50F, gameLoop.motionEvent.vector2D.x)
-        assertEquals(50F, gameLoop.motionEvent.vector2D.y)
+        assertEquals(50F, gameLoop.motionEvent.point.x)
+        assertEquals(50F, gameLoop.motionEvent.point.y)
 
         builder.setPointer(110F,110F)
         builder.setAction(MotionEvent.ACTION_MOVE)
         assertEquals(GameMotionEvent.Action.DOWN , gameLoop.motionEvent.action)
-        assertEquals(50F, gameLoop.motionEvent.vector2D.x)
-        assertEquals(50F, gameLoop.motionEvent.vector2D.y)
+        assertEquals(50F, gameLoop.motionEvent.point.x)
+        assertEquals(50F, gameLoop.motionEvent.point.y)
 
         // cleanup
         motionEvent.recycle()

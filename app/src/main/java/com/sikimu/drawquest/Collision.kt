@@ -5,8 +5,8 @@ package com.sikimu.drawquest
  */
 class Collision {
     companion object{
-        fun contains(vector : Vector2D, hitData : HitData) : Boolean {
-            return vector.x in hitData.left..hitData.right && vector.y in hitData.top..hitData.bottom
+        fun contains(point : Point, hitData : HitData) : Boolean {
+            return point.x in hitData.left..hitData.right && point.y in hitData.top..hitData.bottom
         }
     }
 }

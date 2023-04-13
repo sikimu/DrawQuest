@@ -1,7 +1,7 @@
 package com.sikimu.drawquest.game
 
 import com.sikimu.drawquest.GameMotionEvent
-import com.sikimu.drawquest.Vector2D
+import com.sikimu.drawquest.Point
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -16,11 +16,11 @@ class GameTitleTest {
         val gameTitle = GameTitle()
 
         // クリック位置がクリック対象の中にある場合
-        val result1 = gameTitle.update(GameMotionEvent(Vector2D(0F, 500F), GameMotionEvent.Action.UP))
+        val result1 = gameTitle.update(GameMotionEvent(Point(0F, 500F) , GameMotionEvent.Action.UP))
         assertEquals(result1::class, GameMain::class)
 
         // クリック位置がクリック対象の外にある場合
-        val result2 = gameTitle.update(GameMotionEvent(Vector2D(0F, 800F), GameMotionEvent.Action.UP))
+        val result2 = gameTitle.update(GameMotionEvent(Point(0F, 800F), GameMotionEvent.Action.UP))
         assertEquals(result2::class, GameTitle::class)
     }
 
@@ -32,7 +32,7 @@ class GameTitleTest {
         val gameTitle = GameTitle()
 
         // MotionEvent.ACTION_UP以外の場合はGameTitleのインスタンスが返る
-        val result = gameTitle.update(GameMotionEvent(Vector2D(0F, 500F), GameMotionEvent.Action.DOWN))
+        val result = gameTitle.update(GameMotionEvent(Point(0F, 500F), GameMotionEvent.Action.DOWN))
         assertEquals(result::class, GameTitle::class)
     }
 }

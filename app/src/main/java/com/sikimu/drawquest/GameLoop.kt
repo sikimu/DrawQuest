@@ -5,7 +5,7 @@ import com.sikimu.drawquest.game.Game
 import com.sikimu.drawquest.game.GameTitle
 
 class GameLoop(private val system: GameHandler) : Runnable {
-    val motionEvent = GameMotionEvent(Vector2D(0F,0F) , GameMotionEvent.Action.FREE)
+    val motionEvent = GameMotionEvent(Point(0F,0F) , GameMotionEvent.Action.FREE)
     private var isRunning = false
     private var lastUpdateTime = System.currentTimeMillis()
     private var game: Game = GameTitle()
@@ -46,22 +46,22 @@ class GameLoop(private val system: GameHandler) : Runnable {
     fun onTouchEvent(event: MotionEvent, width: Int, height: Int): Boolean {
 
         // 画面の中心に原点を移動
-        val vector2D = Vector2D(event.x - (width / 2), event.y - (height / 2))
+        val point = Point(event.x - (width / 2), event.y - (height / 2))
 
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
                 motionEvent.action = GameMotionEvent.Action.DOWN
-                motionEvent.vector2D = vector2D
+                motionEvent.point = point
             }
             MotionEvent.ACTION_UP -> {
                 motionEvent.action = GameMotionEvent.Action.UP
-                motionEvent.vector2D = vector2D
+                motionEvent.point = point
             }
             MotionEvent.ACTION_MOVE -> {
                 //DOWNだけは優先して認識
                 if (motionEvent.action != GameMotionEvent.Action.DOWN) {
                     motionEvent.action = GameMotionEvent.Action.PRESS
-                    motionEvent.vector2D = vector2D
+                    motionEvent.point = point
                 }
             }
         }
