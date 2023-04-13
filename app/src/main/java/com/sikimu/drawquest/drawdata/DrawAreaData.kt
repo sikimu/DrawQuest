@@ -104,7 +104,7 @@ data class DrawAreaData(
         val y = y.calc(screenWidth, screenHeight)
         val w = width.calc(screenWidth, screenHeight)
         val h = height.calc(screenWidth, screenHeight)
-        return Area(x, y, x + w, y + h)
+        return Area(x, y, w, h)
     }
 
     /**
@@ -115,6 +115,6 @@ data class DrawAreaData(
         val y = y.calc(screenWidth, screenHeight)
         val w = width.calc(screenWidth, screenHeight)
         val h = height.calc(screenWidth, screenHeight)
-        return Area(x - (w / 2), y - (h / 2), x + (w / 2), y + (h / 2))
+        return Area(x - (w / 2), y - (h / 2), w, h)
     }
 }
