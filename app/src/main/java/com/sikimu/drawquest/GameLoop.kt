@@ -5,7 +5,7 @@ import com.sikimu.drawquest.game.Game
 import com.sikimu.drawquest.game.GameTitle
 
 class GameLoop(private val system: GameHandler) : Runnable {
-    val motionEvent = GameMotionEvent(Point(0F,0F) , GameMotionEvent.Action.FREE)
+    var motionEvent = GameMotionEvent(Point(0F,0F) , GameMotionEvent.Action.FREE)
     private var isRunning = false
     private var lastUpdateTime = System.currentTimeMillis()
     private var game: Game = GameTitle()
@@ -24,7 +24,7 @@ class GameLoop(private val system: GameHandler) : Runnable {
 
             //Downを解除する
             if (motionEvent.action == GameMotionEvent.Action.DOWN) {
-                motionEvent.action = GameMotionEvent.Action.PRESS
+                motionEvent = GameMotionEvent(motionEvent.point, GameMotionEvent.Action.PRESS)
             }
 
             system.postDelayed(this, elapsedTime)
@@ -50,18 +50,15 @@ class GameLoop(private val system: GameHandler) : Runnable {
 
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
-                motionEvent.action = GameMotionEvent.Action.DOWN
-                motionEvent.point = point
+                motionEvent = GameMotionEvent(point, GameMotionEvent.Action.DOWN)
             }
             MotionEvent.ACTION_UP -> {
-                motionEvent.action = GameMotionEvent.Action.UP
-                motionEvent.point = point
+                motionEvent = GameMotionEvent(point, GameMotionEvent.Action.UP)
             }
             MotionEvent.ACTION_MOVE -> {
                 //DOWNだけは優先して認識
                 if (motionEvent.action != GameMotionEvent.Action.DOWN) {
-                    motionEvent.action = GameMotionEvent.Action.PRESS
-                    motionEvent.point = point
+                    motionEvent = GameMotionEvent(point, GameMotionEvent.Action.PRESS)
                 }
             }
         }
