@@ -11,20 +11,12 @@ class DrawingDataStorage(private var backgroundColor: Int = Color.WHITE) {
         rectList.add(rect)
     }
 
-    fun removeRect(rect: DrawData) {
-        rectList.remove(rect)
-    }
-
-    fun clearStorage() {
-        rectList.clear()
+    fun addRectAll(rectList: List<DrawData>) {
+        this.rectList.addAll(rectList)
     }
 
     fun getStorage(): List<DrawData> {
         return rectList
-    }
-
-    fun setBackgroundColor(color: Int) {
-        backgroundColor = color
     }
 
     fun getBackgroundColor(): Int {
