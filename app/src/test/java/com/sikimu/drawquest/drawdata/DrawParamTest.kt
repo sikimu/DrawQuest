@@ -25,6 +25,12 @@ class DrawParamTest {
     }
 
     @Test
+    fun calcScreenH_Multiply() {
+        val screenH = DrawParam.ScreenH * 0.5F
+        assertEquals(960f, screenH.calc(1080, 1920))
+    }
+
+    @Test
     fun calcExpressionPlus() {
         val result = (DrawParam.Pixel(100f) + DrawParam.Pixel(50f) + 25f).calc(1080, 1920)
         assertEquals(175f, result)
