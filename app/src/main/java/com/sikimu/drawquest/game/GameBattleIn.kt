@@ -10,6 +10,9 @@ import com.sikimu.drawquest.drawdata.FillCenterRectData
 import com.sikimu.drawquest.drawer.RectEnemyDrawer
 import com.sikimu.drawquest.drawer.RectPlayerDrawer
 
+/**
+ * 戦闘開始時の暗転モード
+ */
 class GameBattleIn(worldData : WorldData): Game() {
 
     private var darkness = 0 // 矩形の暗さ (0: 透明, 255: 黒)
