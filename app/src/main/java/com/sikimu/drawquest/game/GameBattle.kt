@@ -17,6 +17,7 @@ class GameBattle : Game() {
         val storage = DrawingDataStorage(Color.BLACK)
         storage.addRectAll(BattleDrawer.createEnemyWindow())
         storage.addRect(BattleDrawer.createSelectWindow())
+        storage.addRect(BattleDrawer.createPlayerWindow())
         storage.addRect(RectEnemyDrawer.create(DrawParam.Pixel(0F), DrawParam.Pixel(-300F)))
         return storage
     }
