@@ -13,7 +13,7 @@ data class StrokeCenterRectData(val drawAreaData : DrawAreaData , val color: Int
         paint.color = color
         paint.style = Paint.Style.STROKE
         paint.strokeWidth = strokeWidth
-        val area = drawAreaData.calcAreaCenter(canvas.width, canvas.height)
+        val area = DrawAreaData.calcAreaCenter(drawAreaData, canvas.width, canvas.height)
         val rect = RectF(area.left, area.top, area.right, area.bottom)
         canvas.drawRect(rect, paint) // rectListに格納された矩形を描画
     }

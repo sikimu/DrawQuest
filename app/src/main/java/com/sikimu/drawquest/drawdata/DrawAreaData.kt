@@ -8,6 +8,26 @@ data class DrawAreaData(
     val width: DrawParam ,
     val height: DrawParam
 ) {
+    companion object{
+        fun calcArea(drawAreaData : DrawAreaData, screenWidth : Int , screenHeight : Int): Area {
+            val x = drawAreaData.x.calc(screenWidth, screenHeight)
+            val y = drawAreaData.y.calc(screenWidth, screenHeight)
+            val w = drawAreaData.width.calc(screenWidth, screenHeight)
+            val h = drawAreaData.height.calc(screenWidth, screenHeight)
+            return Area(x, y, w, h)
+        }
+        /**
+         * 中央に合わせて座標出力
+         */
+        fun calcAreaCenter(drawAreaData : DrawAreaData, screenWidth : Int , screenHeight : Int): Area {
+            val x = drawAreaData.x.calc(screenWidth, screenHeight)
+            val y = drawAreaData.y.calc(screenWidth, screenHeight)
+            val w = drawAreaData.width.calc(screenWidth, screenHeight)
+            val h = drawAreaData.height.calc(screenWidth, screenHeight)
+            return Area(x - (w / 2), y - (h / 2), w, h)
+        }
+    }
+
     constructor(x: Float, y: Float, width: Float, height: Float): this(
         x = DrawParam.Pixel(x),
         y = DrawParam.Pixel(y),
@@ -98,23 +118,4 @@ data class DrawAreaData(
         width = width,
         height = height
     )
-
-    fun calcArea(screenWidth : Int , screenHeight : Int): Area {
-        val x = x.calc(screenWidth, screenHeight)
-        val y = y.calc(screenWidth, screenHeight)
-        val w = width.calc(screenWidth, screenHeight)
-        val h = height.calc(screenWidth, screenHeight)
-        return Area(x, y, w, h)
-    }
-
-    /**
-     * 中央に合わせて座標出力
-     */
-    fun calcAreaCenter(screenWidth : Int , screenHeight : Int): Area {
-        val x = x.calc(screenWidth, screenHeight)
-        val y = y.calc(screenWidth, screenHeight)
-        val w = width.calc(screenWidth, screenHeight)
-        val h = height.calc(screenWidth, screenHeight)
-        return Area(x - (w / 2), y - (h / 2), w, h)
-    }
 }

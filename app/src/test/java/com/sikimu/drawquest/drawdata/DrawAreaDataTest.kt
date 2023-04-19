@@ -28,7 +28,7 @@ internal class DrawAreaDataTest{
             width = DrawParam.Pixel(100F),
             height = DrawParam.Pixel(200F)
         )
-        val area = drawAreaData.calcArea(800, 600)
+        val area = DrawAreaData.calcArea(drawAreaData, 800, 600)
         assertEquals(50F, area.left)
         assertEquals(50F, area.top)
         assertEquals(150F, area.right)
