@@ -10,12 +10,8 @@ class BattleDrawer {
     companion object{
         // 敵を表示する矩形の描画データ
         private val enemyWindow = StrokeRectData(
-            DrawAreaData(
-                -400F,
-                -700F,
-                800F,
-                600F
-            ) ,
+            DrawPoint(-400F, -700F),
+            DrawSize(800F, 600F),
             Color.WHITE,
             10F
         )
@@ -35,12 +31,8 @@ class BattleDrawer {
         )
 
         private val selectWindow = StrokeRectData(
-            DrawAreaData(
-                -500F,
-                400F,
-                1000F,
-                400F
-            ) ,
+            DrawPoint(-500F, 400F),
+            DrawSize(1000F, 400F),
             Color.WHITE,
             10F
         )
@@ -49,12 +41,8 @@ class BattleDrawer {
          * プレイヤーウィンドウ
          */
         private val playerWindow = StrokeRectData(
-            DrawAreaData(
-                -400F,
-                -50F,
-                800F,
-                400F
-            ) ,
+            DrawPoint(-400F, -50F),
+            DrawSize(800F, 400F),
             Color.WHITE,
             10F
         )

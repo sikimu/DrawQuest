@@ -7,13 +7,13 @@ import android.graphics.RectF
 /**
  * DrawAreaDataを使った矩形描画クラス
  */
-data class StrokeRectData(val drawAreaData : DrawAreaData, val color: Int, val strokeWidth: Float) : DrawData() {
+data class StrokeRectData(val drawPoint : DrawPoint, val drawSize : DrawSize, val color: Int, val strokeWidth: Float) : DrawData() {
 
     override fun draw(canvas : Canvas , paint : Paint) {
         paint.color = color
         paint.style = Paint.Style.STROKE
         paint.strokeWidth = strokeWidth
-        val area = DrawAreaData.calcArea(drawAreaData, canvas.width, canvas.height)
+        val area = DrawAreaCalculator.calcArea(drawPoint, drawSize, canvas.width, canvas.height)
         val rect = RectF(area.left, area.top, area.right, area.bottom)
         canvas.drawRect(rect, paint) // rectListに格納された矩形を描画
     }
