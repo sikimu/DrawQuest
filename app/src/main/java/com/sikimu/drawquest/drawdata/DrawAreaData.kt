@@ -9,6 +9,10 @@ data class DrawAreaData(
     val height: DrawParam
 ) {
     companion object{
+
+        /**
+         * 座標出力
+         */
         fun calcArea(drawAreaData : DrawAreaData, screenWidth : Int , screenHeight : Int): Area {
             val x = drawAreaData.x.calc(screenWidth, screenHeight)
             val y = drawAreaData.y.calc(screenWidth, screenHeight)
@@ -16,6 +20,18 @@ data class DrawAreaData(
             val h = drawAreaData.height.calc(screenWidth, screenHeight)
             return Area(x, y, w, h)
         }
+
+        /**
+         * 座標出力
+         */
+        fun calcArea(drawPoint : DrawPoint, drawSize : DrawSize, screenWidth : Int , screenHeight : Int): Area {
+            val x = drawPoint.x.calc(screenWidth, screenHeight)
+            val y = drawPoint.y.calc(screenWidth, screenHeight)
+            val w = drawSize.width.calc(screenWidth, screenHeight)
+            val h = drawSize.height.calc(screenWidth, screenHeight)
+            return Area(x, y, w, h)
+        }
+
         /**
          * 中央に合わせて座標出力
          */

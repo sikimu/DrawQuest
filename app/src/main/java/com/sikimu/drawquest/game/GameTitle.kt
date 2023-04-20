@@ -2,7 +2,8 @@ package com.sikimu.drawquest.game
 
 import android.graphics.Color
 import com.sikimu.drawquest.*
-import com.sikimu.drawquest.drawdata.DrawAreaData
+import com.sikimu.drawquest.drawdata.DrawPoint
+import com.sikimu.drawquest.drawdata.DrawSize
 import com.sikimu.drawquest.drawdata.FillRectData
 
 class GameTitle : Game(){
@@ -16,7 +17,9 @@ class GameTitle : Game(){
     /**
      * ボタン矩形
      */
-    private val button = FillRectData(DrawAreaData(-250F, 450F, 500F, 100F) , Color.WHITE)
+    private val button = FillRectData(
+        DrawPoint(-250F, 450F),
+        DrawSize(500F, 100F), Color.WHITE)
 
     override fun update(motionEvent: GameMotionEvent): Game {
         if(motionEvent.action == GameMotionEvent.Action.UP) {
