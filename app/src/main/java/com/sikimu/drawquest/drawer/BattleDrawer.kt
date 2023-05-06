@@ -67,8 +67,8 @@ class BattleDrawer {
         /**
          * プレイヤーのを描画する描画データの作成
          */
-        fun createPlayerWindow(): List<DrawData> {
-            val player = RectPlayerDrawer.create(DrawPoint(0F, 150F))
+        fun createPlayerWindow(color : Int) : List<DrawData> {
+            val player = RectPlayerDrawer.create(DrawPoint(0F, 150F), color)
             return listOf(playerBg, playerWindow, player)
         }
 

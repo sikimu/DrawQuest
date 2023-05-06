@@ -39,7 +39,7 @@ class GameBattleIn(worldData : WorldData): Game() {
 
     override fun createStorage(): DrawingDataStorage {
         val storage = DrawingDataStorage(Color.GREEN)
-        storage.addRect(RectPlayerDrawer.create(DrawPoint(0F, 0F)))
+        storage.addRect(RectPlayerDrawer.create(DrawPoint(0F, 0F), Color.BLUE))
         storage.addRect(RectEnemyDrawer.create(DrawPoint(enemyViewCenterX, enemyViewCenterY)))
         storage.addRect(fillRectData)
 

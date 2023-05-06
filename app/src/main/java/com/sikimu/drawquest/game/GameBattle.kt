@@ -15,7 +15,8 @@ class GameBattle : Game() {
         val storage = DrawingDataStorage(Color.BLACK)
         storage.addRectAll(BattleDrawer.createEnemyWindow())
         storage.addRect(BattleDrawer.createSelectWindow())
-        storage.addRectAll(BattleDrawer.createPlayerWindow())
+        //TODO プレイヤーの色を受け取るようにする
+        storage.addRectAll(BattleDrawer.createPlayerWindow(Color.BLUE))
         return storage
     }
 }

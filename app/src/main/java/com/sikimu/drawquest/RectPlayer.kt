@@ -1,6 +1,8 @@
 package com.sikimu.drawquest
 
-class RectPlayer {
+import android.graphics.Color
+
+class RectPlayer() {
     companion object {
         const val WIDTH = 100F
         const val HEIGHT = 100F
@@ -11,6 +13,8 @@ class RectPlayer {
 
     private var start: Point = Point(0F, 0F)
     private var delta: Vector2D = Vector2D(0F, 0F)
+
+    private val color: ColorData = ColorData(0, 0, 255)
 
     fun update(motionEvent: GameMotionEvent) {
         when (motionEvent.action) {
@@ -35,6 +39,10 @@ class RectPlayer {
                 delta = Vector2D(0f, 0f)
             }
         }
+    }
+
+    fun getColor(): Int {
+        return Color.rgb(color.r, color.g, color.b)
     }
 
     fun getDelta(): Vector2D {

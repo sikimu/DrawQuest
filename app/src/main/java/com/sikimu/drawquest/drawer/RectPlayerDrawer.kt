@@ -9,11 +9,11 @@ import com.sikimu.drawquest.drawdata.FillStrokeCenterRectData
 class RectPlayerDrawer {
     companion object{
 
-        fun create(point: DrawPoint): FillStrokeCenterRectData {
+        fun create(point: DrawPoint, color: Int): FillStrokeCenterRectData {
             return FillStrokeCenterRectData(
                 point,
                 DrawSize(RectPlayer.WIDTH , RectPlayer.HEIGHT),
-                Color.BLUE, Color.BLACK)
+                color, Color.BLACK)
         }
     }
 }
