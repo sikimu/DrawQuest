@@ -4,6 +4,7 @@ import android.graphics.Color
 import com.sikimu.drawquest.*
 import com.sikimu.drawquest.drawer.RectEnemyDrawer
 import com.sikimu.drawquest.drawdata.DrawParam
+import com.sikimu.drawquest.drawdata.DrawPoint
 import com.sikimu.drawquest.drawer.RectPlayerDrawer
 
 /**
@@ -51,7 +52,7 @@ class GameMain(private val worldData : WorldData) : Game() {
 
         return DrawingDataStorage(Color.GREEN).apply {
             addRect(RectPlayerDrawer.create())
-            addRect(RectEnemyDrawer.create(enemyViewCenterX, enemyViewCenterY))
+            addRect(RectEnemyDrawer.create(DrawPoint(enemyViewCenterX, enemyViewCenterY)))
         }
     }
 }

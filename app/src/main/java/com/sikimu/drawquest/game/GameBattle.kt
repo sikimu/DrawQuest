@@ -18,7 +18,7 @@ class GameBattle : Game() {
         storage.addRectAll(BattleDrawer.createEnemyWindow())
         storage.addRect(BattleDrawer.createSelectWindow())
         storage.addRect(BattleDrawer.createPlayerWindow())
-        storage.addRect(RectEnemyDrawer.create(DrawParam.Pixel(0F), DrawParam.Pixel(-300F)))
+        storage.addRect(RectEnemyDrawer.create(DrawPoint(0F,-300F)))
         return storage
     }
 }
