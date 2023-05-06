@@ -8,8 +8,8 @@ class RectEnemyDrawer {
         const val WIDTH = 100f
         private const val HEIGHT = 100f
 
-        fun create(point : DrawPoint): FillCenterRectData {
-            return FillCenterRectData(point, DrawSize(WIDTH, HEIGHT) , Color.BLACK)
+        fun create(point : DrawPoint): FillStrokeCenterRectData {
+            return FillStrokeCenterRectData(point, DrawSize(WIDTH, HEIGHT) , Color.BLACK, Color.WHITE)
         }
     }
 }
