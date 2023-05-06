@@ -9,9 +9,9 @@ import com.sikimu.drawquest.drawdata.FillCenterRectData
 class RectPlayerDrawer {
     companion object{
 
-        fun create(): FillCenterRectData {
+        fun create(point: DrawPoint): FillCenterRectData {
             return FillCenterRectData(
-                DrawPoint(0F,0F),
+                point,
                 DrawSize(RectPlayer.WIDTH , RectPlayer.HEIGHT),
                 Color.BLUE)
         }

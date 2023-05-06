@@ -51,7 +51,7 @@ class GameMain(private val worldData : WorldData) : Game() {
     override fun createStorage(): DrawingDataStorage {
 
         return DrawingDataStorage(Color.GREEN).apply {
-            addRect(RectPlayerDrawer.create())
+            addRect(RectPlayerDrawer.create(DrawPoint(0F, 0F)))
             addRect(RectEnemyDrawer.create(DrawPoint(enemyViewCenterX, enemyViewCenterY)))
         }
     }
