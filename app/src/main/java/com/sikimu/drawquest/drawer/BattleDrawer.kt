@@ -48,6 +48,15 @@ class BattleDrawer {
         )
 
         /**
+         * プレイヤーウィンドウの背景
+         */
+        private val playerBg = FillRectData(
+            DrawPoint(-400F, -50F),
+            DrawSize(800F, 400F),
+            Color.LTGRAY
+        )
+
+        /**
          * 敵のウィンドウをまとめて描画する描画データ配列の作成
          */
         fun createEnemyWindow(): List<DrawData> {
@@ -60,7 +69,7 @@ class BattleDrawer {
          */
         fun createPlayerWindow(): List<DrawData> {
             val player = RectPlayerDrawer.create(DrawPoint(0F, 150F))
-            return listOf(playerWindow, player)
+            return listOf(playerBg, playerWindow, player)
         }
 
         /**
