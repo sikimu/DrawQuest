@@ -3,9 +3,7 @@ package com.sikimu.drawquest.game
 import android.graphics.Color
 import com.sikimu.drawquest.DrawingDataStorage
 import com.sikimu.drawquest.GameMotionEvent
-import com.sikimu.drawquest.drawdata.*
 import com.sikimu.drawquest.drawer.BattleDrawer
-import com.sikimu.drawquest.drawer.RectEnemyDrawer
 
 class GameBattle : Game() {
     override fun update(motionEvent: GameMotionEvent): Game {
@@ -17,8 +15,7 @@ class GameBattle : Game() {
         val storage = DrawingDataStorage(Color.BLACK)
         storage.addRectAll(BattleDrawer.createEnemyWindow())
         storage.addRect(BattleDrawer.createSelectWindow())
-        storage.addRect(BattleDrawer.createPlayerWindow())
-        storage.addRect(RectEnemyDrawer.create(DrawPoint(0F,-300F)))
+        storage.addRectAll(BattleDrawer.createPlayerWindow())
         return storage
     }
 }

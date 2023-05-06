@@ -51,14 +51,16 @@ class BattleDrawer {
          * 敵のウィンドウをまとめて描画する描画データ配列の作成
          */
         fun createEnemyWindow(): List<DrawData> {
-            return listOf(enemySky , enemyField, enemyWindow)
+            val enemy = RectEnemyDrawer.create(DrawPoint(0F, -300F))
+            return listOf(enemySky , enemyField, enemyWindow, enemy)
         }
 
         /**
          * プレイヤーのを描画する描画データの作成
          */
-        fun createPlayerWindow(): DrawData {
-            return playerWindow
+        fun createPlayerWindow(): List<DrawData> {
+            val player = RectPlayerDrawer.create(DrawPoint(0F, 150F))
+            return listOf(playerWindow, player)
         }
 
         /**
