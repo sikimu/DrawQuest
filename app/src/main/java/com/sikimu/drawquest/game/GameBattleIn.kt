@@ -11,7 +11,7 @@ import com.sikimu.drawquest.drawer.RectPlayerDrawer
 /**
  * 戦闘開始時の暗転モード
  */
-class GameBattleIn(worldData : WorldData): Game() {
+class GameBattleIn(private val worldData : WorldData): Game() {
 
     private var darkness = 0 // 矩形の暗さ (0: 透明, 255: 黒)
     private var fillRectData =
@@ -32,7 +32,7 @@ class GameBattleIn(worldData : WorldData): Game() {
 
         if (darkness >= 256 * 3) {
             // 暗さが255になったら次のモードに移行する
-            return GameBattle()
+            return GameBattle(worldData)
         }
         return this
     }

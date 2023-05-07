@@ -3,9 +3,10 @@ package com.sikimu.drawquest.game
 import android.graphics.Color
 import com.sikimu.drawquest.DrawingDataStorage
 import com.sikimu.drawquest.GameMotionEvent
+import com.sikimu.drawquest.WorldData
 import com.sikimu.drawquest.drawer.BattleDrawer
 
-class GameBattle : Game() {
+class GameBattle(val worldData : WorldData) : Game() {
     override fun update(motionEvent: GameMotionEvent): Game {
         return this
     }
@@ -15,8 +16,8 @@ class GameBattle : Game() {
         val storage = DrawingDataStorage(Color.BLACK)
         storage.addRectAll(BattleDrawer.createEnemyWindow())
         storage.addRect(BattleDrawer.createSelectWindow())
-        //TODO プレイヤーの色を受け取るようにする
-        storage.addRectAll(BattleDrawer.createPlayerWindow(Color.BLUE))
+        //TODO プレイヤーを渡すようにする
+        storage.addRectAll(BattleDrawer.createPlayerWindow(worldData.player.getColor()))
         return storage
     }
 }
