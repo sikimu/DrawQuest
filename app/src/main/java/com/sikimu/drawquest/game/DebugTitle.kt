@@ -24,7 +24,7 @@ class DebugTitle : Game(){
     override fun update(motionEvent: GameMotionEvent): Game {
         if(motionEvent.action == GameMotionEvent.Action.UP) {
             if(Collision.contains(motionEvent.point, tapArea)) {
-                return GameMain(WorldData())
+                return GameTitle()
             }
         }
         return this

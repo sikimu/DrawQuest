@@ -27,6 +27,10 @@ class GameLoop(private val system: GameHandler) : Runnable {
             if (motionEvent.action == GameMotionEvent.Action.DOWN) {
                 motionEvent = GameMotionEvent(motionEvent.point, GameMotionEvent.Action.PRESS)
             }
+            //UPを解除する
+            if (motionEvent.action == GameMotionEvent.Action.UP) {
+                motionEvent = GameMotionEvent(motionEvent.point, GameMotionEvent.Action.FREE)
+            }
 
             system.postDelayed(this, elapsedTime)
         }
