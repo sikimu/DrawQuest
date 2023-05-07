@@ -1,6 +1,7 @@
 package com.sikimu.drawquest
 
 import android.view.MotionEvent
+import com.sikimu.drawquest.game.DebugTitle
 import com.sikimu.drawquest.game.Game
 import com.sikimu.drawquest.game.GameTitle
 
@@ -8,7 +9,7 @@ class GameLoop(private val system: GameHandler) : Runnable {
     var motionEvent = GameMotionEvent(Point(0F,0F) , GameMotionEvent.Action.FREE)
     private var isRunning = false
     private var lastUpdateTime = System.currentTimeMillis()
-    private var game: Game = GameTitle()
+    private var game: Game = if (BuildConfig.DEBUG) DebugTitle() else GameTitle()
 
     override fun run() {
         if (isRunning) {
