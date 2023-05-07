@@ -6,7 +6,7 @@ import com.sikimu.drawquest.GameMotionEvent
 import com.sikimu.drawquest.WorldData
 import com.sikimu.drawquest.drawer.BattleDrawer
 
-class GameBattle(val worldData : WorldData) : Game() {
+class GameBattle(private val worldData : WorldData) : Game() {
     override fun update(motionEvent: GameMotionEvent): Game {
         return this
     }
